@@ -60,10 +60,6 @@ reviewSchema.virtual('user', {
 
 const Review = mongoose.model('Review', reviewSchema);
 
-Review.find({}).populate('user').exec(function(error, users) {
-    /* `bands.members` is now an array of instances of `Person` */
-});
-
 // model
 module.exports = {
     Review, reviewSchema,

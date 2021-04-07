@@ -9,8 +9,8 @@ class ReviewController {
             const {id} = req.params;
             const reviews = await Review
                 .find({movieId: id})
+                .lean()
                 .populate('user', 'userName')
-                .select('rating review movieId userId')
                 .exec();
             res.status(200).json(reviews);
         } catch (e) {
