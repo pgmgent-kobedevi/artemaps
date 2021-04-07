@@ -3,13 +3,14 @@ const express = require('express');
 const MovieController = require('../controllers/MovieController');
 const ReviewController = require('../controllers/ReviewController');
 const DirectorController = require('../controllers/DirectorController');
+const LikedMovieController = require('../controllers/LikedMovieController');
 const { withRole } = require('../services/auth/auth.services');
 const { roles } = require('../models/User');
 
 const directorController = new DirectorController();
 const movieController = new MovieController();
 const reviewController = new ReviewController();
-// const logController = new LogController();
+const likedMovieController = new LikedMovieController();
 
 const authRouter = express.Router();
 const adminRouter = express.Router();
@@ -34,8 +35,8 @@ authRouter.post('/movies/:id/reviews', reviewController.createReviewByMovie);
 adminRouter.delete('/movies/:id/reviews/:reviewid', reviewController.deleteReviewById);
 
 // likedMovies
-// authRouter.get('/likedMovies', logController.getLogsByProject);
-// authRouter.post('/likedMovies', logController.createLogByProject);
+authRouter.get('/likedMovies', likedMovieController.getLikedMovies);
+authRouter.post('/likedMovies', likedMovieController.createLikedMovie);
 
 authRouter.use(withRole(roles.admin), adminRouter);
 
