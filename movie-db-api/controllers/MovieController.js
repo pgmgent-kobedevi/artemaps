@@ -6,7 +6,7 @@ class MovieController {
         
     getMovies = async(req, res, next) => {
         try {
-            const movies = await Movie.find().exec();
+            const movies = await Movie.find().lean().populate('director', ['firstName', 'lastName']).exec();
             res.status(200).json(movies);
         } catch (e) {
             next(e);
