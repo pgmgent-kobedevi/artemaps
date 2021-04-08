@@ -1,0 +1,48 @@
+import { createContext, useContext, useState } from "react";
+import App from '../App/App';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Routes } from "../../core/routing";
+import LoginPage from "../OnBoarding/Login/LoginPage";
+import storage from "../../core/storage";
+
+const AuthContext = createContext();
+
+const AuthContainer = () => {
+    const [user, setUser] = useState(storage.getUser());
+
+    const updateUser = (user) => {
+        storage.storeUser(user);
+        setUser(user)
+    }
+
+    const logout = () => {
+        updateUser(null);
+    }
+
+    if(user) {
+        return (
+            <AuthContext.Provider value={{user, setUser: updateUser, logout}}>
+                <App/>
+            </AuthContext.Provider>
+        )
+    }
+
+    return (
+        <Switch>
+            <Route path={Routes.Login}>
+                <LoginPage setUser={updateUser}/>
+            </Route>
+            <Redirect to={Routes.Login} />
+        </Switch>
+    )
+}
+
+const useAuth = () => {
+    return useContext(AuthContext);
+}
+
+export {
+    useAuth,
+}
+
+export default AuthContainer;
