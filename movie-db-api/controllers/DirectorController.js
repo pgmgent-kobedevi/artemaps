@@ -33,14 +33,38 @@ class DirectorController {
             const {id} = req.params;
             const director = await Director.findById(id).exec();
             if(director) {
-                // this way the pre('remove') from Movie triggers
-                // works but not optimal
+                // cant use pre because off multiple delete possibilities
+                await Movie.find({directorId: id}).exec()
+                .then( async(res) => {
+                    res.map( async(movie) => {
+
+                        movie.directorId = null;
+                        await movie.save();
+                    })
+                })
+                .then(async () => await director.remove())
+                res.status(200).json({message: "Director removed"});
+            } else {
+                next(new NotFoundError());
+            }
+        } catch(e) {
+            next(e);
+        }
+    }
+
+    deleteDirectorByIdAndMovies = async(req,res,next) => {
+        try {
+            const {id} = req.params;
+            const director = await Director.findById(id).exec();
+            if(director) {
+                // cant use pre because off multiple delete possibilities
                 await Movie.find({directorId: id}).exec()
                 .then( async(res) => {
                     res.map( async(movie) => {
                         await movie.remove()
                     })
-                }).then(async () => await director.remove())
+                })
+                .then(async () => await director.remove())
                 res.status(200).json({message: "Director removed"});
             } else {
                 next(new NotFoundError());

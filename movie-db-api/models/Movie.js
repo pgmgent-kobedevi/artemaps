@@ -21,7 +21,7 @@ const movieSchema = new mongoose.Schema({
     },
     directorId: {
         type: 'ObjectId',
-        required: true,
+        default: null,
     },
 }, {
   timestamps: true,  
