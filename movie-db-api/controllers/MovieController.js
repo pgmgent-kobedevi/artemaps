@@ -16,7 +16,7 @@ class MovieController {
     getMovieById = async(req, res, next) => {
         try {
             const {id} = req.params;
-            const movie = await Movie.findById(id).exec();
+            const movie = await Movie.findById(id).lean().populate('director', ['firstName', 'lastName']).exec();
             if(movie) {
                 res.status(200).json(movie);
             } else {
