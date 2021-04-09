@@ -18,6 +18,7 @@ const adminRouter = express.Router();
 // directors
 authRouter.get('/directors', directorController.getDirectors); // overview
 authRouter.get('/directors/:id', directorController.getDirectorById); // detail
+authRouter.get('/directors/:id/movies', directorController.getMoviesByDirectorId); // detail
 adminRouter.post('/directors', directorController.createDirector); // add
 adminRouter.patch('/directors/:id', directorController.updateDirectorById); // update
 adminRouter.delete('/directors/:id', directorController.deleteDirectorById); // delete

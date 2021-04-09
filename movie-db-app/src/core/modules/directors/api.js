@@ -1,19 +1,21 @@
 import { createHeaders } from "../../utils/api";
 
 const fetchDirectors = () => (headers) => {
-
     return fetch(`${process.env.REACT_APP_BASE_API}/directors`, {
         headers: createHeaders(headers),
     });
-
 }
 
 const fetchDirector = (id) => (headers) => {
-
     return fetch(`${process.env.REACT_APP_BASE_API}/directors/${id}`, {
         headers: createHeaders(headers),
     });
+}
 
+const fetchMoviesByDirector = ({directorId}) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/directors/${directorId}/movies`, {
+        headers: createHeaders(headers),
+    });
 }
 
 const createDirector = (data) => (headers) => {
@@ -36,6 +38,7 @@ const updateDirector = (data) => (headers) => {
 export {
     fetchDirectors,
     fetchDirector,
+    fetchMoviesByDirector,
     createDirector,
     updateDirector,
 }

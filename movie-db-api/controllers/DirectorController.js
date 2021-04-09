@@ -28,6 +28,20 @@ class DirectorController {
         }
     }
 
+    getMoviesByDirectorId = async(req, res, next) => {
+        try {
+            const {id} = req.params;
+            const movies = await Movie.find({directorId: id}).exec();
+            if(movies) {
+                res.status(200).json(movies);
+            } else {
+                next(new NotFoundError());
+            }
+        } catch(e) {
+            next(e);
+        }
+    }
+
     deleteDirectorById = async(req,res,next) => {
         try {
             const {id} = req.params;
