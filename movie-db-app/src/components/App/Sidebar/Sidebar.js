@@ -2,14 +2,6 @@ import { Link } from 'react-router-dom';
 import { Routes } from '../../../core/routing';
 
 const items = [{
-    'label': 'Projects',
-    'route': Routes.Projects,
-    'icon': null,
-}, {
-    'label': 'Clients',
-    'route': Routes.Clients,
-    'icon': null,
-},{
     'label': 'Movies',
     'route': Routes.Movies,
     'icon': null,
