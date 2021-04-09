@@ -2,22 +2,15 @@ const Routes = Object.freeze({
     // old
     Login: '/login',
     
-    Projects: '/projects',
-    ProjectsDetail: '/projects/:id',
-    ProjectsCreate: '/projects/create',
-    ProjectsEdit: '/projects/:id/edit',
-
-    ProjectsDetailAddLog: '/projects/:id/add',
-
-    Clients: '/clients',
-    ClientsDetail: '/clients/:id',
-    ClientsEdit: '/clients/:id/edit',
-    ClientsCreate: '/clients/create',
-
     Movies: '/movies',
     MoviesDetail: '/movies/:id',
     MoviesCreate: '/movies/create',
     MoviesEdit: '/movies/:id/edit',
+
+    Directors: '/directors',
+    DirectorsDetail: '/directors/:id',
+    DirectorsCreate: '/directors/create',
+    DirectorsEdit: '/directors/:id/edit',
 });
 
 // replaces : values with values from object
