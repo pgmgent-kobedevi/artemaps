@@ -9,7 +9,7 @@ import MovieForm from "../../form/MovieForm"
 const EditMovie = ({movie, onUpdate}) => {
 
     const withAuth = useAuthApi();
-    const history = useHistory();
+    const history = useHistory()
     const [isLoading, setIsLoading] = useState();
     const [error, setError] = useState();
 
