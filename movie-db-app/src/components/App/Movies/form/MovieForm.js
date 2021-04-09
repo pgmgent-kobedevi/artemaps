@@ -35,15 +35,19 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
     const handleChange = (e) => {
         
         if(e.target.localName === 'select') {
-
-            // insanely dumb workaround to actually show the change when showed back to detailpage
+            // insanely dumb workaround to actually show the visually update 
+            // because: virtual field only updates when fetched again
+            // get label from selected option
             const text = e.target.[e.target.options.selectedIndex].innerHTML;
+            // make sure we have a firstname and lastname...
+            // split by space
             const res = text.split(" ");
+            // first half of the label is firstname
             const firstName = res.splice(0, Math.ceil(res.length / 2));
+            // second half is lastname
             const lastName = res.splice((Math.ceil(res.length / 2)) - 1, res.length);
-            // set virtual field director to an accurate name from the selected director option.
+            // set virtual field 'director' to this.
             // virtual field only updates when fetched again.
-            // this way director name is visually updated before needing to update
             setData({
                 ...data,
                 director: {
