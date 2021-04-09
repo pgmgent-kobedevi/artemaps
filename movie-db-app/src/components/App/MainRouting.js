@@ -1,6 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Movies from './Movies/Movies';
-// import Clients from './Clients/Clients';
+import Directors from './Directors/Directors';
 import { Routes } from '../../core/routing';
 
 const MainRouting = () => {
@@ -9,9 +9,9 @@ const MainRouting = () => {
             <Route path={Routes.Movies}>
                 <Movies />
             </Route>
-            {/* <Route path={Routes.Clients}>
-                <Clients />
-            </Route> */}
+            <Route path={Routes.Directors}>
+                <Directors />
+            </Route>
             <Redirect to={Routes.Movies} />
         </Switch>
     );
