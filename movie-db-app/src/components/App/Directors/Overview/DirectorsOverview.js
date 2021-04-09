@@ -27,7 +27,7 @@ const DirectorsOverview = () => {
         <>
             <h1>Directors</h1>
             {
-                admin && <Link to={Routes.DirectorsCreate}>Create Director</Link>
+                admin && <Link className='add' to={Routes.DirectorsCreate}>➕</Link>
             }
             <ul>
                 {directors.map((director) => (

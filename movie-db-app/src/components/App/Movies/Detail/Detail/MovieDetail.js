@@ -13,8 +13,8 @@ const MovieDetail = ({movie}) => {
             <p>Director: {movie.director.firstName} {movie.director.lastName}</p>
             <p>Release year: {format(new Date(movie.releaseDate), 'yyyy')}</p>
             <AdminContainer>
-                <Link to={route(Routes.MoviesEdit, {id: movie._id})}>
-                    Edit movie
+                <Link className="edit" to={route(Routes.MoviesEdit, {id: movie._id})}>
+                    📝
                 </Link>
             </AdminContainer>
 

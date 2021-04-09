@@ -9,8 +9,8 @@ const DirectorDetail = ({director}) => {
         <>
             <h1>{director.name}</h1>
             <AdminContainer>
-                <Link to={route(Routes.DirectorsEdit, {id: director._id})}>
-                    Edit director
+                <Link className='edit' to={route(Routes.DirectorsEdit, {id: director._id})}>
+                    📝
                 </Link>
             </AdminContainer>
 
