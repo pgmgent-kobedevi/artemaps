@@ -46,24 +46,6 @@ class LikedMovieController {
     //         next(e);
     //     }
     // }
-
-    // updateMovieById = async(req,res,next) => {
-    //     try {
-    //         const {id} = req.params;
-    //         // find 
-    //         const movie = await Movie.findById(id).exec();
-    //         if(movie) {
-    //             // update
-    //             movie.overwrite(req.body);
-    //             const result = await movie.save();
-    //             res.status(200).json(result);
-    //         } else {
-    //             next(new NotFoundError());
-    //         }
-    //     } catch(e) {
-    //         next(e.name && e.name === "ValidationError" ? new ValidationError(e) : e);
-    //     }
-    // }
     
     createLikedMovie = async (req, res, next) => {
         try {

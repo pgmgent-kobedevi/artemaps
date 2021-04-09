@@ -1,10 +1,7 @@
-import { Link } from 'react-router-dom';
-import { route, Routes } from '../../../../../../core/routing';
 import useFetch from '../../../../../../core/hooks/useFetch';
 import Spinner from '../../../../../Design/Spinner';
 import Alert from '../../../../../Design/Alert';
 import { fetchReviewsByMovie } from '../../../../../../core/modules/reviews/api';
-import useAdmin from '../../../../../../core/hooks/useAdmin';
 import { useCallback } from 'react';
 
 const ReviewsOverview = ({movieId}) => {
@@ -16,8 +13,6 @@ const ReviewsOverview = ({movieId}) => {
         isLoading
     } = useFetch(fetchReviews);
 
-//     const admin = useAdmin();
-
     if (isLoading) {
         return <Spinner />;
     }
@@ -28,9 +23,6 @@ if (error) {
 
     return (
         <>
-            {/* {
-                admin && <Link to={Routes.MoviesCreate}>Add movie</Link>
-            } */}
             <ul>
                 { reviews.map((review) => (
                     <li key={review._id}>
