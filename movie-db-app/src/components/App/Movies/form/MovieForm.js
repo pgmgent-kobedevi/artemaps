@@ -33,10 +33,32 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
     const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        setData({
-           ...data,
-           [e.target.name]: e.target.value
-        })
+        
+        if(e.target.localName === 'select') {
+
+            // insanely dumb workaround to actually show the change when showed back to detailpage
+            const text = e.target.[e.target.options.selectedIndex].innerHTML;
+            const res = text.split(" ");
+            const firstName = res.splice(0, Math.ceil(res.length / 2));
+            const lastName = res.splice((Math.ceil(res.length / 2)) - 1, res.length);
+            // set virtual field director to an accurate name from the selected director option.
+            // virtual field only updates when fetched again.
+            // this way director name is visually updated before needing to update
+            setData({
+                ...data,
+                director: {
+                    _id: e.target.value,
+                    firstName: firstName[0],
+                    lastName: lastName[0]
+                },
+                directorId: e.target.value,
+            })
+        } else {
+            setData({
+               ...data,
+               [e.target.name]: e.target.value
+            })
+        }
     }
 
     const validate = useCallback((data, onSuccess) => {
