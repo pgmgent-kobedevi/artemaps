@@ -6,6 +6,7 @@ const Routes = Object.freeze({
     MoviesDetail: '/movies/:id',
     MoviesCreate: '/movies/create',
     MoviesEdit: '/movies/:id/edit',
+    MoviesCreateReview: '/movies/:id/review',
 
     Directors: '/directors',
     DirectorsDetail: '/directors/:id',

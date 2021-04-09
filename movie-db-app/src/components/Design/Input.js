@@ -11,6 +11,8 @@ const Input = React.forwardRef(
             value,
             error,
             disabled,
+            min = 1,
+            max,
             ...rest
         },
         ref
@@ -26,6 +28,8 @@ const Input = React.forwardRef(
                     disabled={disabled}
                     value={value}
                     onChange={onChange}
+                    min={min}
+                    max={max}
                     {...rest}
                 />
                 {error && <div className="invalid-feedback">{error}</div>}
@@ -41,6 +45,8 @@ Input.propTypes = {
     value: PropTypes.string,
     disabled: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
+    min: PropTypes.string,
+    max: PropTypes.string,
 };
 
 export default Input;

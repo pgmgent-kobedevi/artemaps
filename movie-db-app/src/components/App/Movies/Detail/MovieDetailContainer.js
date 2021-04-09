@@ -8,6 +8,7 @@ import { Routes } from '../../../../core/routing';
 import EditMovie from './Edit/EditMovie';
 import MovieDetail from './Detail/MovieDetail';
 import AdminRoute from '../../../Shared/Route/AdminRoute';
+import CreateReview from './Reviews/Create/CreateReview';
 
 
 const MovieDetailContainer = () => {
@@ -40,6 +41,9 @@ const MovieDetailContainer = () => {
                 <AdminRoute path={Routes.MoviesEdit}>
                     <EditMovie movie={movie} onUpdate={(data) => setData(data)}/>
                 </AdminRoute>
+                <Route path={Routes.MoviesCreateReview}>
+                    <CreateReview movie={movie} />
+                </Route>
                 <Route path={Routes.MoviesDetail}>
                     <MovieDetail movie={movie} />
                 </Route>

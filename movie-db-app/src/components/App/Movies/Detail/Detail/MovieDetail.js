@@ -10,7 +10,9 @@ const MovieDetail = ({movie}) => {
     return (
         <>
             <h1>{movie.title}</h1>
-            <p>Director: {movie.director.firstName} {movie.director.lastName}</p>
+            {
+                movie.director && <p>Director: {movie.director.firstName} {movie.director.lastName}</p>
+            }
             <p>Release year: {format(new Date(movie.releaseDate), 'yyyy')}</p>
             <AdminContainer>
                 <Link className="edit" to={route(Routes.MoviesEdit, {id: movie._id})}>
@@ -19,7 +21,7 @@ const MovieDetail = ({movie}) => {
             </AdminContainer>
 
             <h2>Reviews</h2>
-
+            <Link to={route(Routes.MoviesCreateReview, {id: movie._id})} movie={movie}>Add review</Link>
             <ReviewsOverview movieId={movie._id}/>
         </>
     );
