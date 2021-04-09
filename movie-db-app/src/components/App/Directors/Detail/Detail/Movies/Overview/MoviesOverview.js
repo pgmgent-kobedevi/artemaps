@@ -3,6 +3,9 @@ import Spinner from '../../../../../../Design/Spinner';
 import Alert from '../../../../../../Design/Alert';
 import { fetchMoviesByDirector } from '../../../../../../../core/modules/directors/api';
 import { useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { route, Routes } from '../../../../../../../core/routing';
+import MovieCard from '../../../../../../Design/MovieCard';
 
 const MoviesOverview = ({directorId}) => {
     const fetchMovies = useCallback(() => fetchMoviesByDirector({directorId}), [directorId]);
@@ -23,12 +26,12 @@ if (error) {
 
     return (
         <>
-            <ul>
+            <ul className='movieList'>
                 { movies.map((movie) => (
                     <li key={movie._id}>
-                        <div>
-                            <h3>{movie.title}</h3>
-                        </div>
+                        <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
+                            <MovieCard movie={movie}/>
+                        </Link>
                     </li>
                 ))}
             </ul>

@@ -6,6 +6,7 @@ import Alert from '../../../Design/Alert';
 // import Button from '../../../Design/Button';
 import { fetchMovies } from '../../../../core/modules/movies/api';
 import useAdmin from '../../../../core/hooks/useAdmin';
+import MovieCard from '../../../Design/MovieCard';
 
 const MoviesOverview = () => {
     const {
@@ -27,13 +28,14 @@ if (error) {
     return (
         <>
             {
-                admin && <Link to={Routes.MoviesCreate}>Add movie</Link>
+                admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
             }
-            <ul>
+            <h1>Movies:</h1>
+            <ul className='movieList'>
                 { movies.map((movie) => (
                     <li key={movie._id}>
                         <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
-                            { movie.title }
+                            <MovieCard movie={movie}/>
                         </Link>
                     </li>
                 ))}
