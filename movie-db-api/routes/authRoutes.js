@@ -39,6 +39,7 @@ adminRouter.delete('/movies/:id/reviews/:reviewid', reviewController.deleteRevie
 // likedMovies
 authRouter.get('/likedMovies', likedMovieController.getLikedMovies);
 authRouter.post('/likedMovies', likedMovieController.createLikedMovie);
+authRouter.delete('/likedMovies/:id', likedMovieController.deleteLikedMovie);
 
 authRouter.use(withRole(roles.admin), adminRouter);
 

@@ -1,6 +1,8 @@
 const Routes = Object.freeze({
     // old
     Login: '/login',
+
+    LikedMovies: '/likedMovies',
     
     Movies: '/movies',
     MoviesDetail: '/movies/:id',

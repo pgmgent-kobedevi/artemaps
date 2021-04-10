@@ -18,20 +18,20 @@ class LikedMovieController {
         }
     }
 
-    // deleteLikedMovie = async(req,res,next) => {
-    //     try {
-    //         const {id} = req.params;
-    //         const movie = await Movie.findById(id).exec();
-    //         if(movie) {
-    //             await movie.remove();
-    //             res.status(200).json({message: "Movie removed"});
-    //         } else {
-    //             next(new NotFoundError());
-    //         }
-    //     } catch(e) {
-    //         next(e);
-    //     }
-    // }
+    deleteLikedMovie = async(req,res,next) => {
+        try {
+            const {id} = req.params;
+            const movie = await LikedMovie.findById(id).exec();
+            if(movie) {
+                await movie.remove();
+                res.status(200).json({message: "Liked movie removed"});
+            } else {
+                next(new NotFoundError());
+            }
+        } catch(e) {
+            next(e);
+        }
+    }
     
     createLikedMovie = async (req, res, next) => {
         try {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { route, Routes } from '../../../../core/routing';
+import { Routes } from '../../../../core/routing';
 import useFetch from '../../../../core/hooks/useFetch';
 import Spinner from '../../../Design/Spinner';
 import Alert from '../../../Design/Alert';
@@ -21,7 +21,7 @@ const MoviesOverview = () => {
         return <Spinner />;
     }
 
-if (error) {
+    if (error) {
         return <Alert color="danger">{error}</Alert>;
     }
 

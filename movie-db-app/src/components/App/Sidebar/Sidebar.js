@@ -9,6 +9,10 @@ const items = [{
     'label': 'Directors',
     'route': Routes.Directors,
     'icon': null,
+}, {
+    'label': 'Liked movies',
+    'route': Routes.LikedMovies,
+    'icon': null,
 }]
 
 const Sidebar = () => {
