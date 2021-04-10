@@ -5,7 +5,7 @@ import Input from "../../../../../Design/Input";
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
-    rating: yup.number().required(),
+    rating: yup.number().min(1).max(10).required(),
     review: yup.string(),
 });
 
