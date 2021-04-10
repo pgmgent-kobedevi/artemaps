@@ -14,7 +14,7 @@ const MoviesOverview = () => {
         error,
         isLoading
     } = useFetch(fetchMovies);
-
+    
     const admin = useAdmin();
 
     if (isLoading) {
@@ -34,9 +34,7 @@ if (error) {
             <ul className='movieList'>
                 { movies.map((movie) => (
                     <li key={movie._id}>
-                        <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
-                            <MovieCard movie={movie}/>
-                        </Link>
+                        <MovieCard movie={movie}/>
                     </li>
                 ))}
             </ul>
