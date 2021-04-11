@@ -4,7 +4,7 @@ import { createLikedMovie, deleteLikedMovie, deleteLikedMovieTest } from "../../
 import useAuthApi from "../../../../core/hooks/useAuthApi";
 import { useAuth } from "../../../Auth/AuthContainer";
 
-const Like = ({id, onUpdate, onError}) => {
+const Like = ({id, movieId, onUpdate, onError}) => {
 
     const withAuth = useAuthApi();
     const {user} = useAuth();
@@ -20,20 +20,20 @@ const Like = ({id, onUpdate, onError}) => {
     // what a mess!
     // console.log(likedMovies);
     const toggleLike = () => {
-        console.log(likedMovies.some((movie) => movie.movieId === id))
+        console.log(likedMovies.some((movie) => movie.movieId === movieId))
         let newArray = likedMovies;
         // if movie is already in liked list
-        if(likedMovies.some((movie) => movie.movieId === id)) {
+        if(likedMovies.some((movie) => movie.movieId === movieId)) {
             // TODO remove from liked list
             let toRemoveId;
             newArray = newArray.filter((movie) => {
                 console.log(newArray);
                 console.log(movie);
                 console.log(movie.movie)
-                if(movie.movieId === id) {
-                    toRemoveId = movie._id;
+                if(movie.movieId === movieId) {
+                    toRemoveId= id;
                 }
-                return movie.movieId !== id
+                return movie.movieId !== movieId
             });
             // console.log('id ', id);
             console.log(toRemoveId);
@@ -47,7 +47,7 @@ const Like = ({id, onUpdate, onError}) => {
         }
         else {
             withAuth(createLikedMovie({
-                movieId: id,
+                movieId: movieId,
             }))
             .then(() => {
                 newArray.push({

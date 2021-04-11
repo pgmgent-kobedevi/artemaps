@@ -32,6 +32,7 @@ const LikedMoviesOverview = () => {
                         <MovieCard 
                             onUpdate={(data) => setLikedMovies(data)} 
                             onError={(data) => setError(data)}
+                            id={item._id}
                             movie={item.movie}
                         />
                     </li>
