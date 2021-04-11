@@ -36,7 +36,7 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
         
         if(e.target.localName === 'select') {
             // insanely dumb workaround to actually show the visually update 
-            // because: virtual field only updates when fetched again
+            // because: virtual fields only updates when fetched again
             // get label from selected option
             const text = e.target.[e.target.options.selectedIndex].innerHTML;
             // make sure we have a firstname and lastname...
