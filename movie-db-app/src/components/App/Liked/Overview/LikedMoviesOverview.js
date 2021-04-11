@@ -11,7 +11,6 @@ const LikedMoviesOverview = () => {
         data: likedMovies,
         setData: setLikedMovies,
         error,
-        setError,
         isLoading
     } = useFetch(fetchLikedMovies);
 
@@ -28,11 +27,9 @@ const LikedMoviesOverview = () => {
             <h1>Your liked movies:</h1>
             <ul className='movieList'>
                 { likedMovies.map((item) => (
-                    <li key={item._id}>
+                    <li key={item.movieId}>
                         <MovieCard 
                             onUpdate={(data) => setLikedMovies(data)} 
-                            onError={(data) => setError(data)}
-                            id={item._id}
                             movie={item.movie}
                         />
                     </li>

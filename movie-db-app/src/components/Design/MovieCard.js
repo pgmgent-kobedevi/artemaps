@@ -2,15 +2,14 @@ import { Link } from "react-router-dom";
 import { route, Routes } from "../../core/routing";
 import Like from "../App/Movies/Like/Like";
 
-const MovieCard = ({movie, id, onUpdate, onError}) => {
+const MovieCard = ({movie, onUpdate}) => {
 
     return (
         <div className='movieCard'>
             <Like 
                 onUpdate={onUpdate} 
-                onError={onError}
                 movieId={movie._id}
-                id={id}
+                movie={movie}
             />
             <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
                 <img src={movie.coverLink} alt='Movie poster'/>

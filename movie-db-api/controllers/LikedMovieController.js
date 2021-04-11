@@ -32,6 +32,26 @@ class LikedMovieController {
             next(e);
         }
     }
+
+    deleteLikedMovieWithoutId = async(req,res,next) => {
+        try {
+            const {user}= req;
+            const {movieId} = req.params;
+            console.log(user, movieId);
+            const movies = await LikedMovie.find({userId: user._id, movieId: movieId}).exec();
+            console.log(movies);
+            if(movies) {
+                movies.map( async(movie) => {
+                    await movie.remove();
+                })
+                res.status(200).json({message: "Liked movie removed"});
+            } else {
+                next(new NotFoundError());
+            }
+        } catch(e) {
+            next(e);
+        }
+    }
     
     createLikedMovie = async (req, res, next) => {
         try {

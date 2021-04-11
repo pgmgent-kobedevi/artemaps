@@ -1,68 +1,48 @@
 import HeartIcon from "./img/HeartIcon"
 import { useLikedMovies } from "../../App";
-import { createLikedMovie, deleteLikedMovie, deleteLikedMovieTest } from "../../../../core/modules/likedMovies/api";
+import { createLikedMovie, deleteLikedMovieByMovieId } from "../../../../core/modules/likedMovies/api";
 import useAuthApi from "../../../../core/hooks/useAuthApi";
 import { useAuth } from "../../../Auth/AuthContainer";
 
-const Like = ({id, movieId, onUpdate, onError}) => {
+const Like = ({movieId, onUpdate, movie}) => {
 
     const withAuth = useAuthApi();
     const {user} = useAuth();
     const {likedMovies, setLikedMovies} = useLikedMovies();
 
-
-
-    // TODO
-    // sometimes toRemoveId is undefined
-    // sometimes it complains about unique keys even when it has a unique key
-
-
-    // what a mess!
-    // console.log(likedMovies);
     const toggleLike = () => {
-        console.log(likedMovies.some((movie) => movie.movieId === movieId))
-        let newArray = likedMovies;
+        let tempArray = likedMovies;
         // if movie is already in liked list
         if(likedMovies.some((movie) => movie.movieId === movieId)) {
-            // TODO remove from liked list
-            let toRemoveId;
-            newArray = newArray.filter((movie) => {
-                console.log(newArray);
-                console.log(movie);
-                console.log(movie.movie)
-                if(movie.movieId === movieId) {
-                    toRemoveId= id;
+            tempArray = tempArray.filter((item) => {
+                if(item.movieId === movieId) {
+                    deleteLikedMovieByMovieId(movieId, user);
                 }
-                return movie.movieId !== movieId
+                return item.movieId !== movieId
             });
-            // console.log('id ', id);
-            console.log(toRemoveId);
 
+            // if theres an onUpdate function update dom
             if(onUpdate) {
-                onUpdate(newArray);
+                onUpdate(tempArray);
             }
-            setLikedMovies(newArray);
-            // TODO convert this to proper delete function
-            deleteLikedMovieTest(toRemoveId, user);
+            // update local likedMovies
+            setLikedMovies(tempArray);
         }
         else {
             withAuth(createLikedMovie({
                 movieId: movieId,
             }))
             .then(() => {
-                newArray.push({
-                    movieId: id,
+                tempArray.push({
+                    movieId: movieId,
                     movie:{
-                        _id: id,
+                        ...movie,
                     }
                 })
-                setLikedMovies(newArray);
+                setLikedMovies(tempArray);
             })
         }
     }
-
-    // check if user already likes movie or not
-    // toggle the like
 
     return (
         <HeartIcon onClick={toggleLike}/>
