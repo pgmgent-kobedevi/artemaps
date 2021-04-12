@@ -15,12 +15,14 @@ class MovieController {
 
     getMoviesPaginated = async(req, res, next) => {
         try {
-            const {page} = req.params;
+            const {page, perPage} = req.params;
+            // const {perPage} = req.params;
             // get total amount of pages
             const pageAmount = await Movie.count().exec()
-                .then(totalMovies => Math.ceil(totalMovies / 5));
-            
-            const movies = await Movie.find().lean().populate('director', ['firstName', 'lastName']).limit(5).skip(5 * page).sort({
+                .then((totalMovies) => {
+                    return Math.ceil(totalMovies / perPage)
+                });
+            const movies = await Movie.find().lean().populate('director', ['firstName', 'lastName']).limit(parseInt(perPage)).skip(perPage * page).sort({
                 title: 'desc'
             }).exec();
             res.status(200).json({pageAmount, movies});

@@ -15,10 +15,11 @@ import Pagination from '../../../Design/Pagination';
 const MoviesOverview = () => {
     
     const [page, setPage] = useState(0);
+    const [perPage, setPerPage] = useState(20);
 
     const apiCall = useCallback(() => {
-        return fetchMoviesPaginated(page);
-    }, [page])
+        return fetchMoviesPaginated(page, perPage);
+    }, [page, perPage])
 
     const {
         data: movies,
@@ -36,6 +37,10 @@ const MoviesOverview = () => {
 
     const handlePageClick = (page) => {
         setPage(page);
+    }
+
+    const handlePerPageClick = (perPage) => {
+        setPerPage(perPage);
     }
 
     return (
@@ -77,7 +82,9 @@ const MoviesOverview = () => {
                                     </ul>
                                     <Pagination 
                                         page={page}
+                                        perPage={perPage}
                                         pageAmount={movies.pageAmount}
+                                        perPageClick={handlePerPageClick}
                                         onClick={handlePageClick}
                                     />
                                 </>

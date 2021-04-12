@@ -1,5 +1,4 @@
-
-const Pagination = ({page, pageAmount, onClick}) => {
+const Pagination = ({page, perPage, perPageClick, pageAmount, onClick}) => {
 
     let array = [];
     for (let i = 1; i <= pageAmount; i++) {
@@ -11,17 +10,29 @@ const Pagination = ({page, pageAmount, onClick}) => {
     }
 
     return(
-        <nav className="pagination">
-            <ul>
-                <li key='0'>
-                    <button disabled={page === 0} onClick={() => onClick(page - 1)}>&lt;</button>
-                </li>
-                {array}
-                <li key={pageAmount+1}>
-                    <button disabled={page === pageAmount -1} onClick={() => onClick(page + 1)}>&gt;</button>
-                </li>
-            </ul>
-        </nav>
+        <>
+            <nav className="pagination">
+                <ul>
+                    <li key='0'>
+                        <button disabled={page === 0} onClick={() => onClick(page - 1)}>&lt;</button>
+                    </li>
+                    {array}
+                    <li key={pageAmount+1}>
+                        <button disabled={page === pageAmount -1} onClick={() => onClick(page + 1)}>&gt;</button>
+                    </li>
+                </ul>
+            </nav>
+            <p>Per page:</p>
+            <button className={perPage == 10 ? 'active': ''} onClick={() => perPageClick(10)}>
+                10
+            </button>
+            <button className={perPage == 20 ? 'active': ''} onClick={() => perPageClick(20)}>
+                20
+            </button>
+            <button className={perPage == 50 ? 'active': ''} onClick={() => perPageClick(50)}>
+                50
+            </button>
+        </>
     )
 }
 

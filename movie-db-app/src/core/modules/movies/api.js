@@ -6,8 +6,8 @@ const fetchMovies = () => (headers) => {
     });
 }
 
-const fetchMoviesPaginated = (page) => (headers) => {
-    return fetch(`${process.env.REACT_APP_BASE_API}/movies/paginate/${page}`, {
+const fetchMoviesPaginated = (page, perPage) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/movies/paginate/${page}/${perPage}`, {
         headers: createHeaders(headers),
     });
 }
