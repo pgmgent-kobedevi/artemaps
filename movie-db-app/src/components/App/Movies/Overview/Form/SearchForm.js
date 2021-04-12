@@ -13,7 +13,6 @@ const defaultData = {
 
 const SearchForm = ({onSubmit, setQuery, initialData={}, disabled}) => {
 
-    // const [isTouched, setIsTouched] = useState(false);
     const [data, setData] = useState({
         ...defaultData,
         ...initialData,
@@ -74,6 +73,7 @@ const SearchForm = ({onSubmit, setQuery, initialData={}, disabled}) => {
                     disabled={disabled}
                     onChange={handleChange}
                     error={errors.search}
+                    placeholder='Search...'
                 />
 
                 {/* <input value={data.search} onChange={handleChange} className="form-control" type="search" placeholder="Search..." id="search" name="search"/> */}
