@@ -26,7 +26,7 @@ class ReviewController {
                     return Math.ceil(totalReviews / perPage)
                 });
             const reviews = await Review.find({movieId: id}).lean().populate('user', 'userName').limit(parseInt(perPage)).skip(perPage * page).sort({
-                title: 'desc'
+                createdAt: 'desc'
             }).exec();
             res.status(200).json({pageAmount, reviews});
         } catch (e) {
