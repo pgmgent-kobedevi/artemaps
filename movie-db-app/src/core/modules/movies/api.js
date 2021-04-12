@@ -6,6 +6,12 @@ const fetchMovies = () => (headers) => {
     });
 }
 
+const fetchMoviesPaginated = (page) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/movies/paginate/${page}`, {
+        headers: createHeaders(headers),
+    });
+}
+
 const fetchFilteredMovies = (query) => (headers) => {
     return fetch(`${process.env.REACT_APP_BASE_API}/movies/filter/${query}`, {
         headers: createHeaders(headers),
@@ -37,6 +43,7 @@ const updateMovie = (data) => (headers) => {
 
 export {
     fetchMovies,
+    fetchMoviesPaginated,
     fetchFilteredMovies,
     fetchMovie,
     createMovies,

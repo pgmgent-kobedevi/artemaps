@@ -13,6 +13,22 @@ class MovieController {
         }
     }
 
+    getMoviesPaginated = async(req, res, next) => {
+        try {
+            const {page} = req.params;
+            // get total amount of pages
+            const pageAmount = await Movie.count().exec()
+                .then(totalMovies => Math.ceil(totalMovies / 5));
+            
+            const movies = await Movie.find().lean().populate('director', ['firstName', 'lastName']).limit(5).skip(5 * page).sort({
+                title: 'desc'
+            }).exec();
+            res.status(200).json({pageAmount, movies});
+        } catch (e) {
+            next(e);
+        }
+    }
+
     getMoviesByFilter = async(req, res, next) => {
         const {query} = req.params;
         console.log(query);

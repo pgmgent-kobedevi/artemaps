@@ -25,6 +25,7 @@ adminRouter.delete('/directors/:id', directorController.deleteDirectorById); // 
 adminRouter.delete('/directors/:id/delete', directorController.deleteDirectorByIdAndMovies); // delete on steroids?
 
 // Movies
+authRouter.get('/movies/paginate/:page', movieController.getMoviesPaginated); // overview
 authRouter.get('/movies', movieController.getMovies); // overview
 authRouter.get('/movies/filter/:query', movieController.getMoviesByFilter); // detail
 authRouter.get('/movies/:id', movieController.getMovieById); // detail

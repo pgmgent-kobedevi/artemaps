@@ -4,19 +4,27 @@ import useFetch from '../../../../core/hooks/useFetch';
 import Spinner from '../../../Design/Spinner';
 import Alert from '../../../Design/Alert';
 // import Button from '../../../Design/Button';
-import { fetchMovies } from '../../../../core/modules/movies/api';
+import { fetchMovies, fetchMoviesPaginated } from '../../../../core/modules/movies/api';
 import useAdmin from '../../../../core/hooks/useAdmin';
 import MovieCard from '../../../Design/MovieCard';
 import SearchForm from './Form/SearchForm';
 import Result from './Form/Result';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import Pagination from '../../../Design/Pagination';
 
 const MoviesOverview = () => {
+    
+    const [page, setPage] = useState(0);
+
+    const apiCall = useCallback(() => {
+        return fetchMoviesPaginated(page);
+    }, [page])
+
     const {
         data: movies,
         error,
         isLoading
-    } = useFetch(fetchMovies);
+    } = useFetch(apiCall);
     
     const [query, setQuery] = useState('');
 
@@ -26,36 +34,58 @@ const MoviesOverview = () => {
         setQuery(query.search)
     }
 
-    if (isLoading) {
-        return <Spinner />;
-    }
-
-    if (error) {
-        return <Alert color="danger">{error}</Alert>;
+    const handlePageClick = (page) => {
+        setPage(page);
     }
 
     return (
         <>
             {
-                admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
+                error && <Alert color="danger">{error}</Alert>
             }
+
             <h1>Movies:</h1>
-            <SearchForm
-                onSubmit={onSubmit}
-                setQuery={setQuery}
-            />
+
             {
-                query && <Result result={query}/>
+                isLoading && <Spinner />
             }
+
             {
-                !query && (
-                    <ul className='movieList'>
-                        { movies.map((movie) => (
-                            <li key={movie._id}>
-                                <MovieCard movie={movie}/>
-                            </li>
-                        ))}
-                    </ul>
+                movies && (
+                    <>
+
+                        {
+                            admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
+                        }
+                        
+                        <SearchForm
+                            onSubmit={onSubmit}
+                            setQuery={setQuery}
+                        />
+                        {
+                            query && <Result result={query}/>
+                        }
+                        {
+                            !query && (
+                                <>
+                                    <ul className='movieList'>
+                                        { movies.movies.map((movie) => (
+                                            <li key={movie._id}>
+                                                <MovieCard movie={movie}/>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <Pagination 
+                                        page={page}
+                                        pageAmount={movies.pageAmount}
+                                        onClick={handlePageClick}
+                                    />
+                                </>
+                            )
+                        }
+                        
+                        
+                    </>
                 )
             }
         </>
