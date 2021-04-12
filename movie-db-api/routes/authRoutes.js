@@ -48,6 +48,8 @@ authRouter.delete('/likedMovies/:movieId', likedMovieController.deleteLikedMovie
 
 // users
 adminRouter.get('/users', userController.getUsers);
+adminRouter.get('/users/filter/:query', userController.getUsersFiltered);
+adminRouter.get('/users/paginate/:page/:perPage', userController.getUsersPaginated);
 
 authRouter.use(withRole(roles.admin), adminRouter);
 

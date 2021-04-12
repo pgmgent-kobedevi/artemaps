@@ -26,13 +26,46 @@ class UserController {
 
     getUsers = async(req, res, next) => {
         try {
-            const { user } = req;
+        const { user } = req;
             if (user.isAdmin()) {
                 await User.find().exec()
                 .then((result) => res.status(200).json(result))
             }
         } catch (e) {
             next(e);
+        }
+    }
+    
+    getUsersFiltered = async(req, res, next) => {
+        try {
+        const { user } = req;
+            if (user.isAdmin()) {
+                const { query } = req.params;
+                // WIP Search over multiple fields
+                const result = await User.find( {$or: [({userName: {$regex: '.*' + query + '.*', $options: 'i'} }, {role: {$regex: '.*' + query + '.*', $options: 'i'}} )]} ).exec();
+                res.status(200).json(result)
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    getUsersPaginated = async(req, res, next) => {
+        try {
+            const { user } = req;
+            if (user.isAdmin()) {
+                const {page, perPage} = req.params;
+                const pageAmount = await User.count().exec()
+                    .then((totalUsers) => {
+                        return Math.ceil(totalUsers / perPage)
+                    });
+                const users = await User.find().limit(parseInt(perPage)).skip(perPage * page).sort({
+                    title: 'desc'
+                }).exec();
+                res.status(200).json({pageAmount, users});
+            }
+        } catch (e) {
+            next(new NotFoundError());
         }
     }
 

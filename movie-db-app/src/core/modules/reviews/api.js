@@ -7,7 +7,6 @@ const fetchReviewsByMovie = ({movieId}) => (headers) => {
 }
 
 const fetchReviewsByMoviePagination = ({movieId}, page, perPage) => (headers) => {
-    console.log(`${process.env.REACT_APP_BASE_API}/movies/${movieId}/reviews/${page}/${perPage}`);
     return fetch(`${process.env.REACT_APP_BASE_API}/movies/${movieId}/reviews/${page}/${perPage}`, {
         headers: createHeaders(headers),
     });

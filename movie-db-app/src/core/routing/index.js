@@ -4,6 +4,11 @@ const Routes = Object.freeze({
 
     LikedMovies: '/likedMovies',
     
+    Users: '/users',
+    UsersDetail: '/users/:id',
+    UsersCreate: '/users/create',
+    UsersEdit: '/users/edit',
+
     Movies: '/movies',
     MoviesDetail: '/movies/:id',
     MoviesCreate: '/movies/create',
