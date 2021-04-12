@@ -1,19 +1,21 @@
 import { createHeaders } from "../../utils/api";
 
 const fetchMovies = () => (headers) => {
-
     return fetch(`${process.env.REACT_APP_BASE_API}/movies`, {
         headers: createHeaders(headers),
     });
+}
 
+const fetchFilteredMovies = (query) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/movies/filter/${query}`, {
+        headers: createHeaders(headers),
+    });
 }
 
 const fetchMovie = (id) => (headers) => {
-
     return fetch(`${process.env.REACT_APP_BASE_API}/movies/${id}`, {
         headers: createHeaders(headers),
     });
-
 }
 
 const createMovies = (data) => (headers) => {
@@ -35,6 +37,7 @@ const updateMovie = (data) => (headers) => {
 
 export {
     fetchMovies,
+    fetchFilteredMovies,
     fetchMovie,
     createMovies,
     updateMovie,

@@ -7,6 +7,9 @@ import Alert from '../../../Design/Alert';
 import { fetchMovies } from '../../../../core/modules/movies/api';
 import useAdmin from '../../../../core/hooks/useAdmin';
 import MovieCard from '../../../Design/MovieCard';
+import SearchForm from './Form/SearchForm';
+import Result from './Form/Result';
+import { useState } from 'react';
 
 const MoviesOverview = () => {
     const {
@@ -15,7 +18,13 @@ const MoviesOverview = () => {
         isLoading
     } = useFetch(fetchMovies);
     
+    const [query, setQuery] = useState('');
+
     const admin = useAdmin();
+
+    const onSubmit = (query) => {
+        setQuery(query.search)
+    }
 
     if (isLoading) {
         return <Spinner />;
@@ -31,13 +40,24 @@ const MoviesOverview = () => {
                 admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
             }
             <h1>Movies:</h1>
-            <ul className='movieList'>
-                { movies.map((movie) => (
-                    <li key={movie._id}>
-                        <MovieCard movie={movie}/>
-                    </li>
-                ))}
-            </ul>
+            <SearchForm
+                onSubmit={onSubmit}
+                setQuery={setQuery}
+            />
+            {
+                query && <Result result={query}/>
+            }
+            {
+                !query && (
+                    <ul className='movieList'>
+                        { movies.map((movie) => (
+                            <li key={movie._id}>
+                                <MovieCard movie={movie}/>
+                            </li>
+                        ))}
+                    </ul>
+                )
+            }
         </>
     )
 };

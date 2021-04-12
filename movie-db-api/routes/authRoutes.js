@@ -26,6 +26,7 @@ adminRouter.delete('/directors/:id/delete', directorController.deleteDirectorByI
 
 // Movies
 authRouter.get('/movies', movieController.getMovies); // overview
+authRouter.get('/movies/filter/:query', movieController.getMoviesByFilter); // detail
 authRouter.get('/movies/:id', movieController.getMovieById); // detail
 adminRouter.post('/movies', movieController.createMovie); // add
 adminRouter.patch('/movies/:id', movieController.updateMovieById); // update
