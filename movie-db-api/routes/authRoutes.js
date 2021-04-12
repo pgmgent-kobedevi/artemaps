@@ -6,7 +6,9 @@ const DirectorController = require('../controllers/DirectorController');
 const LikedMovieController = require('../controllers/LikedMovieController');
 const { withRole } = require('../services/auth/auth.services');
 const { roles } = require('../models/User');
+const UserController = require('../controllers/UserController');
 
+const userController = new UserController();
 const directorController = new DirectorController();
 const movieController = new MovieController();
 const reviewController = new ReviewController();
@@ -43,6 +45,9 @@ adminRouter.delete('/movies/:id/reviews/:reviewid', reviewController.deleteRevie
 authRouter.get('/likedMovies', likedMovieController.getLikedMovies);
 authRouter.post('/likedMovies', likedMovieController.createLikedMovie);
 authRouter.delete('/likedMovies/:movieId', likedMovieController.deleteLikedMovieWithoutId);
+
+// users
+adminRouter.get('/users', userController.getUsers);
 
 authRouter.use(withRole(roles.admin), adminRouter);
 

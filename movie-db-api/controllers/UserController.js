@@ -24,6 +24,18 @@ class UserController {
         });
     }
 
+    getUsers = async(req, res, next) => {
+        try {
+            const { user } = req;
+            if (user.isAdmin()) {
+                await User.find().exec()
+                .then((result) => res.status(200).json(result))
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+
 }
 
 module.exports = UserController;
