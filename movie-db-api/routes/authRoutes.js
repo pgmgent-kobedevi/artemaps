@@ -34,6 +34,7 @@ adminRouter.patch('/movies/:id', movieController.updateMovieById); // update
 adminRouter.delete('/movies/:id', movieController.deleteMovieById); // delete
 
 // Reviews
+authRouter.get('/movies/:id/reviews/:page/:perPage', reviewController.getReviewsPaginated);
 authRouter.get('/movies/:id/reviews', reviewController.getReviewsByMovie);
 authRouter.post('/movies/:id/reviews', reviewController.createReviewByMovie);
 adminRouter.delete('/movies/:id/reviews/:reviewid', reviewController.deleteReviewById);

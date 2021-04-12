@@ -1,17 +1,26 @@
 import useFetch from '../../../../../../core/hooks/useFetch';
 import Spinner from '../../../../../Design/Spinner';
 import Alert from '../../../../../Design/Alert';
-import { fetchReviewsByMovie } from '../../../../../../core/modules/reviews/api';
+import { fetchReviewsByMoviePagination } from '../../../../../../core/modules/reviews/api';
 import { useCallback, useState } from 'react';
-import Pagination from './Pagination';
+import Pagination from '../../../../../Design/Pagination';
+// import Pagination from './Pagination';
 
 const ReviewsOverview = ({movieId}) => {
-    const fetchReviews = useCallback(() => fetchReviewsByMovie({movieId}), [movieId]);
     // pagination
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
+    const [perPage, setPerPage] = useState(10);
+
+    const fetchReviews = useCallback(() => {
+        return fetchReviewsByMoviePagination({movieId}, page, perPage)
+    }, [movieId, page, perPage]);
     
     const handlePageClick = (page) => {
         setPage(page);
+    }
+
+    const handlePerPageClick = (perPage) => {
+        setPerPage(perPage);
     }
 
     const {
@@ -19,11 +28,6 @@ const ReviewsOverview = ({movieId}) => {
         error,
         isLoading
     } = useFetch(fetchReviews);
-
-    // review pagination
-    const MAX_PER_PAGE = 4;
-
-
 
     if (isLoading) {
         return <Spinner />;
@@ -34,23 +38,23 @@ const ReviewsOverview = ({movieId}) => {
     }
 
     if(reviews){
-        const pagedReviews = reviews.slice((page - 1) * MAX_PER_PAGE, page * MAX_PER_PAGE);
         return (
             <>
-                    { pagedReviews.map((review) => (
-                        <div key={review._id}>
-                            <h3>{review.user.userName}</h3>
-                            <p>{review.rating}</p>
-                            <p>{review.review}</p>
-                        </div>
-                    ))}
-                
+                { reviews.reviews.map((review) => (
+                    <div key={review._id}>
+                        <h3>{review.user.userName}</h3>
+                        <p>{review.rating}</p>
+                        <p>{review.review}</p>
+                    </div>
+                ))}
                 <Pagination
-                    total={reviews.length}
-                    maxPerPage = {MAX_PER_PAGE}
-                    currentPage={page}
+                    page={page}
+                    perPage={perPage}
+                    pageAmount={reviews.pageAmount}
+                    perPageClick={handlePerPageClick}
                     onClick={handlePageClick}
                 />
+                
             </>
         )
     }
