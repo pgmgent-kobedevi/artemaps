@@ -4,7 +4,7 @@ import useFetch from '../../../../core/hooks/useFetch';
 import Spinner from '../../../Design/Spinner';
 import Alert from '../../../Design/Alert';
 // import Button from '../../../Design/Button';
-import { fetchMovies, fetchMoviesPaginated } from '../../../../core/modules/movies/api';
+import { fetchMoviesPaginated } from '../../../../core/modules/movies/api';
 import useAdmin from '../../../../core/hooks/useAdmin';
 import MovieCard from '../../../Design/MovieCard';
 import SearchForm from './Form/SearchForm';

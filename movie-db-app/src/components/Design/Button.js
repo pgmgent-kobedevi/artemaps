@@ -5,7 +5,8 @@ const Button = ({ children, onClick, color = "primary", type = "button" }) => {
         <button
             className={`btn btn-${color}`}
             onClick={onClick}
-            type={type}>
+            type={type}
+            >
             { children }
         </button>
     )
