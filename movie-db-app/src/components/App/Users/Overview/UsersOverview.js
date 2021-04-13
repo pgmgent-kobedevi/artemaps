@@ -1,15 +1,16 @@
-import { Link } from 'react-router-dom';
-import { Routes } from '../../../../core/routing';
 import useFetch from '../../../../core/hooks/useFetch';
 import Spinner from '../../../Design/Spinner';
 import Alert from '../../../Design/Alert';
-// import Button from '../../../Design/Button';
 import { fetchUsers } from '../../../../core/modules/users/api';
 import useAdmin from '../../../../core/hooks/useAdmin';
 import SearchForm from '../../Movies/Overview/Form/SearchForm';
 import Result from './Form/Result';
 import { useCallback, useState } from 'react';
 import Pagination from '../../../Design/Pagination';
+import Button from '../../../Design/Button';
+import CreateOrEditUser from '../Form/CreateOrEditUser';
+import Table from '../../../Design/Table';
+import DeleteUser from './Delete/DeleteUser';
 
 const UsersOverview = () => {
     
@@ -17,6 +18,8 @@ const UsersOverview = () => {
 
     const [page, setPage] = useState(0);
     const [perPage, setPerPage] = useState(20);
+    const [currentUser, setCurrentUser] = useState();
+    const [deleteUser, setDeleteUser] = useState();
 
     const [query, setQuery] = useState('');
 
@@ -27,7 +30,8 @@ const UsersOverview = () => {
     const {
         data: users,
         error,
-        isLoading
+        isLoading,
+        refresh,
     } = useFetch(apiCall)
     
     const onSubmit = (query) => {
@@ -40,6 +44,16 @@ const UsersOverview = () => {
 
     const handlePerPageClick = (perPage) => {
         setPerPage(perPage);
+    }
+
+    const handleCreateUser = () => {
+        setCurrentUser({});
+    };
+
+    const onUpdate = () => {
+        setCurrentUser(null);
+        setDeleteUser(null);
+        refresh();
     }
 
     return (
@@ -59,7 +73,14 @@ const UsersOverview = () => {
                     <>
 
                         {
-                            admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
+                            admin && 
+                            <Button 
+                                color='primary' 
+                                className="add" 
+                                onClick={() => handleCreateUser()}
+                            >
+                                ➕
+                            </Button>
                         }
                         
                         <SearchForm
@@ -67,29 +88,23 @@ const UsersOverview = () => {
                             setQuery={setQuery}
                         />
                         {
-                            query && <Result result={query}/>
+                            query && 
+                                <Result 
+                                    result={query} 
+                                    setCurrentUser={setCurrentUser} 
+                                    onUpdate={onUpdate} 
+                                    deleteUser={deleteUser} 
+                                    setDeleteUser={setDeleteUser}
+                                />
                         }
                         {
                             !query && (
                                 <>
-                                    <table>
-                                        <thead>
-                                            <tr>    
-                                                <th>User ID</th>
-                                                <th>Username</th>
-                                                <th>role</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            { users.users.map((user) => (
-                                                <tr key={user._id}>
-                                                    <td>{user._id}</td>
-                                                    <td>{user.userName}</td>
-                                                    <td>{user.role}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
+                                    <Table
+                                        users={users.users}
+                                        setter={setCurrentUser}
+                                        deleter={setDeleteUser}
+                                    />
                                     <Pagination 
                                         page={page}
                                         perPage={perPage}
@@ -98,6 +113,24 @@ const UsersOverview = () => {
                                         onClick={handlePageClick}
                                     />
                                 </>
+                            )
+                        }
+                        {
+                            currentUser && (
+                                <CreateOrEditUser
+                                    user={currentUser}
+                                    onUpdate={onUpdate}
+                                    onDismiss={() => setCurrentUser(null)}
+                                />
+                            )
+                        }
+                        {
+                            deleteUser && (
+                                <DeleteUser
+                                    user={deleteUser}
+                                    onUpdate={onUpdate}
+                                    onDismiss={() => setDeleteUser(null)}>
+                                </DeleteUser>
                             )
                         }
                         

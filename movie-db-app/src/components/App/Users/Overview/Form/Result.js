@@ -3,21 +3,29 @@ import useFetch from "../../../../../core/hooks/useFetch";
 import { fetchFilteredUsers } from "../../../../../core/modules/users/api";
 import Alert from "../../../../Design/Alert";
 import Spinner from "../../../../Design/Spinner";
+import Table from "../../../../Design/Table";
+import DeleteUser from "../Delete/DeleteUser";
 
-const Result = ({result}) => {
+const Result = ({result, setCurrentUser, deleteUser, setDeleteUser}) => {
 
     const apiCall = useCallback(() => {
         return fetchFilteredUsers(result);
-    }, [result])
+    }, [result, deleteUser])
 
     const {
         data: users,
         error,
-        isLoading
+        isLoading,
+        refresh,
     } = useFetch(apiCall);
 
     if (isLoading) {
         return <Spinner />;
+    }
+
+    const handleUpdate = () => {
+        setDeleteUser(null);
+        refresh();
     }
 
     if (error) {
@@ -28,24 +36,21 @@ const Result = ({result}) => {
         <>
         {
             users && (
-                <table>
-                <thead>
-                    <tr>    
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    { users.map((user) => (
-                        <tr key={user._id}>
-                            <td>{user._id}</td>
-                            <td>{user.userName}</td>
-                            <td>{user.role}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                <Table
+                    users={users}
+                    setter={setCurrentUser}
+                    deleter={setDeleteUser}
+                />
+            )
+        }
+
+        {
+            deleteUser && (
+                <DeleteUser
+                    user={deleteUser}
+                    onUpdate={handleUpdate}
+                    onDismiss={() => setDeleteUser(null)}>
+                </DeleteUser>
             )
         }
         </>

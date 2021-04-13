@@ -42,7 +42,13 @@ class UserController {
             if (user.isAdmin()) {
                 const { query } = req.params;
                 // WIP Search over multiple fields
-                const result = await User.find( {$or: [({userName: {$regex: '.*' + query + '.*', $options: 'i'} }, {role: {$regex: '.*' + query + '.*', $options: 'i'}} )]} ).exec();
+                const result = await User.find(
+                    {
+                        $or: [
+                        {email: {$regex: '.*' + query + '.*', $options: 'i'}},
+                        {userName: {$regex: '.*' + query + '.*', $options: 'i'}}, 
+                        {role: {$regex: '.*' + query + '.*', $options: 'i'}},
+                    ] }).exec();
                 res.status(200).json(result)
             }
         } catch (e) {
@@ -66,6 +72,37 @@ class UserController {
             }
         } catch (e) {
             next(new NotFoundError());
+        }
+    }
+
+    updateUser = async(req, res, next) => {
+        try {
+            const {id} = req.params;
+            const user = await User.findById({_id: id}).exec();
+            if(user) {
+                user.overwrite(req.body);
+                const result = await user.save();
+                res.status(200).json(result);
+            } else {
+                next(new NotFoundError());
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    deleteUser = async(req, res, next) => {
+        try {
+            const {id} = req.params;
+            const user = await User.findById({_id: id}).exec();
+            if(user) {
+                user.remove();
+                res.status(200);
+            } else {
+                next(new NotFoundError());
+            }
+        } catch (e) {
+            next(e);
         }
     }
 
