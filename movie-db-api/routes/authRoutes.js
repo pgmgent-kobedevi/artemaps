@@ -52,6 +52,7 @@ adminRouter.get('/users/filter/:query', userController.getUsersFiltered);
 adminRouter.get('/users/paginate/:page/:perPage', userController.getUsersPaginated);
 adminRouter.delete('/users/:id', userController.deleteUser);
 adminRouter.patch('/users/:id', userController.updateUser);
+authRouter.patch('/users', userController.updateSelf);
 adminRouter.post('/users', userController.register);
 
 authRouter.use(withRole(roles.admin), adminRouter);

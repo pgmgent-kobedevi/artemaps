@@ -1,28 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
-import { getValidationErrors } from "../../../../core/utils/validation";
-import Button from "../../../Design/Button";
-import Input from "../../../Design/Input";
+import { getValidationErrors } from "../../../../../core/utils/validation";
+import Button from "../../../../Design/Button";
+import Input from "../../../../Design/Input";
 import * as yup from 'yup';
-import RoleSelect from "../Select/RoleSelect";
-import AdminContainer from "../../../Shared/Admin/AdminContainer";
 
 const schema = yup.object().shape({
     email: yup.string().email().required(),
     userName: yup.string().required(),
-    password: yup.string()
-        .required() 
-        .min(5, 'Password is too short - should be 5 chars minimum.'),
-    role: yup.string().required().nullable(),
 });
 
 const defaultData = {
     email: '',
     userName: '',
-    password: '',
-    role: '',
 }
 
-const UserForm = ({onSubmit, initialData={}, disabled, isNew}) => {
+const UserForm = ({onSubmit, initialData={}, disabled}) => {
 
     const [isTouched, setIsTouched] = useState(false);
     const [data, setData] = useState({
@@ -88,33 +80,8 @@ const UserForm = ({onSubmit, initialData={}, disabled, isNew}) => {
                 error={errors.userName}
             />
 
-            {
-                isNew && (
-                    <Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        disabled={disabled}
-                        onChange={handleChange}
-                        error={errors.password}
-                    />
-                )
-            }
-
-            <AdminContainer>
-                <RoleSelect
-                    label="Role"
-                    name="role"
-                    value={data.role}
-                    disabled={disabled}
-                    onChange={handleChange}
-                    error={errors.role}
-                />
-            </AdminContainer>
-
             <Button type="submit" disabled={disabled}>
-                {data._id ? 'Update' : 'Create'}
+                Update
             </Button>
 
         </form>

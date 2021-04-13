@@ -35,10 +35,20 @@ const deleteUser = (id) => (headers) => {
     });
 }
 
+const updateSelf = (data) => (headers) => {
+    console.log(data);
+    return fetch(`${process.env.REACT_APP_BASE_API}/users`, {
+        method:'PATCH',
+        headers: createHeaders(headers),
+        body: JSON.stringify(data),
+    });
+}
+
 export {
     fetchUsers,
     fetchFilteredUsers,
     updateUser,
     createUser,
     deleteUser,
+    updateSelf,
 }

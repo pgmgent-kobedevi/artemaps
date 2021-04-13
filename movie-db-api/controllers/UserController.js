@@ -19,9 +19,20 @@ class UserController {
         res.status(200).json({
             email: user.email,
             role: user.role,
+            userName: user.userName,
             id: user._id,
             token: user.createToken(),
         });
+    }
+
+    getSelf = async(req, res, next) => {
+        try {
+        const { user } = req;
+            await User.find().exec()
+            .then((result) => res.status(200).json(result))
+        } catch (e) {
+            next(e);
+        }
     }
 
     getUsers = async(req, res, next) => {
@@ -88,6 +99,27 @@ class UserController {
             }
         } catch (e) {
             next(e);
+        }
+    }
+
+    updateSelf = async(req, res, next) => {
+        try {
+            const {user} = req;
+            const u = await User.findById({_id: user.id}).exec();
+            if(u) {
+                u.overwrite({
+                    ...u,
+                    password: u.password,
+                    ...req.body,
+                });
+                console.log(u);
+                const result = await u.save();
+                res.status(200).json(result);
+            } else {
+                next(new NotFoundError());
+            }
+        } catch (e) {
+            console.log(e)
         }
     }
 

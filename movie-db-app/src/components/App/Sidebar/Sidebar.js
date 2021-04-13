@@ -15,7 +15,7 @@ const items = [{
     'icon': null,
 }, {
     'label': 'User',
-    'route': Routes.Users,
+    'route': Routes.UsersEdit,
     'icon': null,
 }]
 

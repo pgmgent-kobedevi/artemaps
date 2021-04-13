@@ -3,7 +3,7 @@ import Movies from './Movies/Movies';
 import Directors from './Directors/Directors';
 import { Routes } from '../../core/routing';
 import LikedMoviesOverview from './Liked/Overview/LikedMoviesOverview';
-import UsersOverview from './Users/Overview/UsersOverview';
+import Users from './Users/Users';
 
 const MainRouting = () => {
     return (
@@ -18,7 +18,7 @@ const MainRouting = () => {
                 <LikedMoviesOverview/>
             </Route>
             <Route path={Routes.Users}>
-                <UsersOverview/>
+                <Users/>
             </Route>
             <Redirect to={Routes.Movies} />
         </Switch>

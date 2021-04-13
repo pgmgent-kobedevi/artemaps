@@ -1,25 +1,32 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
+import isAdmin from '../../../core/modules/auth/utils';
 import { Routes } from '../../../core/routing';
+import { useAuth } from '../../Auth/AuthContainer';
 import AdminRoute from '../../Shared/Route/AdminRoute';
-import CreateMovie from './Create/CreateMovie';
-import MovieDetailContainer from './Detail/MovieDetailContainer';
+import EditUser from './Edit/EditUser'
 import UsersOverview from './Overview/UsersOverview';
 
 const Users = () => {
+    const { user } = useAuth();
+    if(!isAdmin(user)) {
+        return (
+            <Switch>
+                <Route path={Routes.UsersEdit}>
+                    <EditUser />
+                </Route>
+                <Redirect to={Routes.UsersEdit} />
+            </Switch>
+        );
+    }
+
     return (
         <Switch>
-            {/* <AdminRoute path={Routes.MoviesCreate}>
-                <CreateUser/>
-            </AdminRoute>
-            <Route path={Routes.MoviesDetail}>
-                <MovieDetailContainer />
-            </Route> */}
-            <AdminRoute path={Routes.users}>
+            <AdminRoute path={Routes.Users}>
                 <UsersOverview />
             </AdminRoute>
-            <Redirect to={Routes.Movies} />
+            <Redirect to={Routes.UsersEdit} />
         </Switch>
-    );
+    )
 };
 
 export default Users;
