@@ -29,9 +29,7 @@ if (error) {
             <ul className='movieList'>
                 { movies.map((movie) => (
                     <li key={movie._id}>
-                        <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
                             <MovieCard movie={movie}/>
-                        </Link>
                     </li>
                 ))}
             </ul>
