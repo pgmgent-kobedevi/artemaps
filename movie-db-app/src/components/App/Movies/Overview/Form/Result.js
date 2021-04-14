@@ -5,11 +5,11 @@ import Alert from "../../../../Design/Alert";
 import MovieCard from "../../../../Design/MovieCard";
 import Spinner from "../../../../Design/Spinner";
 
-const Result = ({result}) => {
+const Result = ({result, deleter, updateChecker}) => {
 
     const apiCall = useCallback(() => {
         return fetchFilteredMovies(result);
-    }, [result])
+    }, [result, updateChecker])
 
     const {
         data: movies,
@@ -32,7 +32,7 @@ const Result = ({result}) => {
                 <ul className='movieList'>
                     { movies.map((movie) => (
                         <li key={movie._id}>
-                            <MovieCard movie={movie}/>
+                            <MovieCard deleter={deleter} movie={movie}/>
                         </li>
                     ))}
                 </ul>

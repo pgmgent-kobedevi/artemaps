@@ -63,7 +63,7 @@ class MovieController {
             const movie = await Movie.findById(id).exec();
             if(movie) {
                 await movie.remove();
-                res.status(200).json({message: "Movie removed"});
+                res.status(200).json({movie});
             } else {
                 next(new NotFoundError());
             }

@@ -41,6 +41,13 @@ const updateMovie = (data) => (headers) => {
     });
 }
 
+const deleteMovie = (id) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/movies/${id}`, {
+        method:'DELETE',
+        headers: createHeaders(headers),
+    });
+}
+
 export {
     fetchMovies,
     fetchMoviesPaginated,
@@ -48,4 +55,5 @@ export {
     fetchMovie,
     createMovies,
     updateMovie,
+    deleteMovie,
 }

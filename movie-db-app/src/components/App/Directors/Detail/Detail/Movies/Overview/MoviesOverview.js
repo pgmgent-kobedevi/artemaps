@@ -29,7 +29,7 @@ if (error) {
             <ul className='movieList'>
                 { movies.map((movie) => (
                     <li key={movie._id}>
-                            <MovieCard movie={movie}/>
+                        <MovieCard movie={movie}/>
                     </li>
                 ))}
             </ul>

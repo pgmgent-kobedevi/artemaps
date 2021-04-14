@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { LikedMovie } = require('./LikedMovie');
 const { Review } = require('./Review');
 
 // schema
@@ -44,6 +45,11 @@ movieSchema.virtual('director', {
 movieSchema.pre(['remove', 'deleteMany'] , function() {
     const movie = this;
     return Review.remove({movieId: movie._id});
+});
+
+movieSchema.pre(['remove', 'deleteMany'] , function() {
+    const movie = this;
+    return LikedMovie.remove({movieId: movie._id});
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
