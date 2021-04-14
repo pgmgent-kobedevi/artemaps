@@ -10,12 +10,18 @@ const AuthContext = createContext();
 const AuthContainer = () => {
     const [user, setUser] = useState(storage.getUser());
 
-    const updateUser = (user) => {
-        storage.storeUser(user);
-        setUser(user)
+    const updateUser = (updatedUser) => {
+        storage.storeUser(updatedUser);
+        if(updatedUser) {
+            storage.storeUserVariableData({'email': updatedUser.email, 'userName': updatedUser.userName});
+        } else {
+            storage.storeUserVariableData(null);
+        }
+        setUser(updatedUser);
     }
 
     const logout = () => {
+        console.log('logged out');
         updateUser(null);
     }
 

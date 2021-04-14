@@ -27,7 +27,7 @@ class UserController {
 
     getSelf = async(req, res, next) => {
         try {
-        const { user } = req;
+            const { user } = req;
             await User.find().exec()
             .then((result) => res.status(200).json(result))
         } catch (e) {
@@ -109,17 +109,18 @@ class UserController {
             if(u) {
                 u.overwrite({
                     ...u,
-                    password: u.password,
                     ...req.body,
+                    password: u.password,
+                    role: u.role,
                 });
-                console.log(u);
+                // console.log(u);
                 const result = await u.save();
-                res.status(200).json(result);
+                res.status(200).json({email: result.email, userName: result.userName});
             } else {
                 next(new NotFoundError());
             }
         } catch (e) {
-            console.log(e)
+            next(e);
         }
     }
 

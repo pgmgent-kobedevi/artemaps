@@ -1,4 +1,5 @@
-const KEY_USER = 'KEY_USER'
+const KEY_USER = 'KEY_USER';
+const USER_EXTRA = 'USER_EXTRA';
 
 
 const storage = {
@@ -12,6 +13,18 @@ const storage = {
     
     storeUser: (user) => {
         localStorage.setItem(KEY_USER, JSON.stringify(user));
+    },
+
+    storeUserVariableData: (user) => {
+        localStorage.setItem(USER_EXTRA, JSON.stringify(user));
+    },
+
+    getUserVariableData: () => {
+        const user = localStorage.getItem(USER_EXTRA);
+        if(user) {
+            return JSON.parse(user);
+        }
+        return null;
     },
     
 };
