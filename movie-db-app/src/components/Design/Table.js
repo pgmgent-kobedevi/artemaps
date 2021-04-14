@@ -1,4 +1,6 @@
 import Button from "./Button";
+import DeleteButton from "./DeleteButton";
+import EditButton from "./EditButton";
 
 const Table = ({users, setter, deleter}) => {
     return (
@@ -16,25 +18,13 @@ const Table = ({users, setter, deleter}) => {
                 { users.map((user) => (
                     <tr key={user._id}>
                         <td>
-                            <Button 
-                                color='danger' 
-                                className="edit" 
-                                onClick={() => deleter(user)}
-                            >
-                                🚮
-                            </Button>
+                            <DeleteButton deleter={() => deleter(user)}/>
                         </td>
                         <td>{user.email}</td>
                         <td>{user.userName}</td>
                         <td>{user.role}</td>
                         <td>
-                            <Button 
-                                color='primary' 
-                                className="edit" 
-                                onClick={() => setter(user)}
-                            >
-                                📝
-                            </Button>
+                            <EditButton editor={() => setter(user)}/>
                         </td>
                     </tr>
                 ))}

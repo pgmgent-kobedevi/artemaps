@@ -9,7 +9,7 @@ const Alert = ({ children, color = "primary" }) => {
 };
 
 Alert.propTypes = {
-    color: PropTypes.oneOf(['primary', 'secondary', 'danger']),
+    color: PropTypes.oneOf(['primary', 'secondary', 'danger', 'info']),
 };
 
 export default Alert;

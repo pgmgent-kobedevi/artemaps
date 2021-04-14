@@ -10,7 +10,6 @@ const Result = ({result, setCurrentUser, deleteUser, setDeleteUser}) => {
 
     const apiCall = useCallback(() => {
         return fetchFilteredUsers(result);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result, deleteUser])
 
     const {

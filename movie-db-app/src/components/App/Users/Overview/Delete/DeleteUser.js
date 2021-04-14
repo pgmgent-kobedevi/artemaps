@@ -3,12 +3,13 @@ import { deleteUser } from "../../../../../core/modules/users/api";
 import Button from "../../../../Design/Button";
 import Modal from "../../../../Shared/Modal";
 
-const DeleteUser = ({user, onDismiss, onUpdate}) => {
+const DeleteUser = ({user, onDismiss, onUpdate, setInfo}) => {
     
     const withAuth = useAuthApi();
 
     const handleDelete = () =>{
-        withAuth(deleteUser(user._id));
+        withAuth(deleteUser(user._id))
+        setInfo('User deleted');
         onUpdate();
     }
 

@@ -7,7 +7,7 @@ import SearchForm from '../../Movies/Overview/Form/SearchForm';
 import Result from './Form/Result';
 import { useCallback, useState } from 'react';
 import Pagination from '../../../Design/Pagination';
-import Button from '../../../Design/Button';
+import AddButton from '../../../Design/AddButton';
 import CreateOrEditUser from '../Form/CreateOrEditUser';
 import Table from '../../../Design/Table';
 import DeleteUser from './Delete/DeleteUser';
@@ -20,6 +20,7 @@ const UsersOverview = () => {
     const [perPage, setPerPage] = useState(20);
     const [currentUser, setCurrentUser] = useState();
     const [deleteUser, setDeleteUser] = useState();
+    const [info, setInfo] = useState();
 
     const [query, setQuery] = useState('');
 
@@ -73,14 +74,12 @@ const UsersOverview = () => {
                     <>
 
                         {
+                            info && <Alert color="info">{info}</Alert>
+                        }
+
+                        {
                             admin && 
-                            <Button 
-                                color='primary' 
-                                className="add" 
-                                onClick={() => handleCreateUser()}
-                            >
-                                ➕
-                            </Button>
+                            <AddButton adder={() => handleCreateUser()}/>
                         }
                         
                         <SearchForm
@@ -129,8 +128,9 @@ const UsersOverview = () => {
                                 <DeleteUser
                                     user={deleteUser}
                                     onUpdate={onUpdate}
-                                    onDismiss={() => setDeleteUser(null)}>
-                                </DeleteUser>
+                                    onDismiss={() => setDeleteUser(null)}
+                                    setInfo={setInfo}
+                                />
                             )
                         }
                         
