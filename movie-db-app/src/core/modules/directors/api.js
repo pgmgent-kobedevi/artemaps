@@ -35,10 +35,26 @@ const updateDirector = (data) => (headers) => {
     });
 }
 
+const deleteDirector = (id) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/directors/${id}`, {
+        method:'DELETE',
+        headers: createHeaders(headers),
+    });
+}
+
+const deleteDirectorAndMovies = (id) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/directors/${id}/delete`, {
+        method:'DELETE',
+        headers: createHeaders(headers),
+    });
+}
+
 export {
     fetchDirectors,
     fetchDirector,
     fetchMoviesByDirector,
     createDirector,
     updateDirector,
+    deleteDirector,
+    deleteDirectorAndMovies
 }

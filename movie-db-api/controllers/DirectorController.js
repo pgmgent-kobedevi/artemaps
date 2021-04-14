@@ -51,13 +51,12 @@ class DirectorController {
                 await Movie.find({directorId: id}).exec()
                 .then( async(res) => {
                     res.map( async(movie) => {
-
                         movie.directorId = null;
                         await movie.save();
                     })
                 })
                 .then(async () => await director.remove())
-                res.status(200).json({message: "Director removed"});
+                res.status(200).json({director});
             } else {
                 next(new NotFoundError());
             }
@@ -70,6 +69,7 @@ class DirectorController {
         try {
             const {id} = req.params;
             const director = await Director.findById(id).exec();
+            console.log(director);
             if(director) {
                 // cant use pre because off multiple delete possibilities
                 await Movie.find({directorId: id}).exec()
@@ -79,7 +79,7 @@ class DirectorController {
                     })
                 })
                 .then(async () => await director.remove())
-                res.status(200).json({message: "Director removed"});
+                res.status(200).json({director});
             } else {
                 next(new NotFoundError());
             }
