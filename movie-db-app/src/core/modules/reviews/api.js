@@ -20,8 +20,16 @@ const createReview = (data, movieId) => (headers) => {
     });
 }
 
+const deleteReview = (reviewId) => (headers) => {
+    return fetch(`${process.env.REACT_APP_BASE_API}/movies/reviews/${reviewId}`, {
+        method:'DELETE',
+        headers: createHeaders(headers),
+    });
+}
+
 export {
     fetchReviewsByMovie,
     fetchReviewsByMoviePagination,
     createReview,
+    deleteReview,
 }

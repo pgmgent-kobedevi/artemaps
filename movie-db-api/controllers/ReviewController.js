@@ -57,7 +57,7 @@ class ReviewController {
             const review = await Review.findById(reviewid).exec();
             if(review) {
                 await review.remove();
-                res.status(200).json({message: "Review removed"});
+                res.status(200);
             } else {
                 next(new NotFoundError());
             }

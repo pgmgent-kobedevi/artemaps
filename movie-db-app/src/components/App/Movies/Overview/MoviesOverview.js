@@ -11,11 +11,14 @@ import SearchForm from './Form/SearchForm';
 import Result from './Form/Result';
 import { useCallback, useState } from 'react';
 import Pagination from '../../../Design/Pagination';
+import DeleteMovie from '../Delete/DeleteMovie';
 
 const MoviesOverview = () => {
     
     const [page, setPage] = useState(0);
     const [perPage, setPerPage] = useState(20);
+    const [deleteMovie, setDeleteMovie] = useState();
+    const [info, setInfo] = useState();
 
     const apiCall = useCallback(() => {
         return fetchMoviesPaginated(page, perPage);
@@ -24,7 +27,9 @@ const MoviesOverview = () => {
     const {
         data: movies,
         error,
-        isLoading
+        setError,
+        isLoading,
+        refresh,
     } = useFetch(apiCall);
     
     const [query, setQuery] = useState('');
@@ -43,10 +48,15 @@ const MoviesOverview = () => {
         setPerPage(perPage);
     }
 
+    const onUpdate = () => {
+        setDeleteMovie(null);
+        refresh();
+    }
+
     return (
         <>
             {
-                error && <Alert color="danger">{error}</Alert>
+                error && <Alert color="danger">{error.message}</Alert>
             }
 
             <h1>Movies:</h1>
@@ -60,6 +70,10 @@ const MoviesOverview = () => {
                     <>
 
                         {
+                            info && <Alert color="info">{info}</Alert>
+                        }
+
+                        {
                             admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
                         }
                         
@@ -68,7 +82,7 @@ const MoviesOverview = () => {
                             setQuery={setQuery}
                         />
                         {
-                            query && <Result result={query}/>
+                            query && <Result updateChecker={deleteMovie} deleter={setDeleteMovie} result={query}/>
                         }
                         {
                             !query && (
@@ -76,7 +90,7 @@ const MoviesOverview = () => {
                                     <ul className='movieList'>
                                         { movies.movies.map((movie) => (
                                             <li key={movie._id}>
-                                                <MovieCard movie={movie}/>
+                                                <MovieCard deleter={setDeleteMovie} movie={movie}/>
                                             </li>
                                         ))}
                                     </ul>
@@ -88,6 +102,18 @@ const MoviesOverview = () => {
                                         onClick={handlePageClick}
                                     />
                                 </>
+                            )
+                        }
+
+                        {
+                            deleteMovie && (
+                                <DeleteMovie
+                                    movie={deleteMovie}
+                                    onUpdate={onUpdate}
+                                    onDismiss={() => setDeleteMovie(null)}
+                                    setError={setError}
+                                    setInfo={setInfo}
+                                />
                             )
                         }
                         

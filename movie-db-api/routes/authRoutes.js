@@ -39,7 +39,7 @@ adminRouter.delete('/movies/:id', movieController.deleteMovieById); // delete
 authRouter.get('/movies/:id/reviews/:page/:perPage', reviewController.getReviewsPaginated);
 authRouter.get('/movies/:id/reviews', reviewController.getReviewsByMovie);
 authRouter.post('/movies/:id/reviews', reviewController.createReviewByMovie);
-adminRouter.delete('/movies/:id/reviews/:reviewid', reviewController.deleteReviewById);
+adminRouter.delete('/movies/reviews/:reviewid', reviewController.deleteReviewById);
 
 // likedMovies
 authRouter.get('/likedMovies', likedMovieController.getLikedMovies);
