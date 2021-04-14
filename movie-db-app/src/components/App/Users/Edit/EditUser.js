@@ -40,7 +40,7 @@ const EditUser = () => {
         <>
             {
                 message && (
-                    <Alert color='secondary'>Profile updated succesfully</Alert>
+                    <Alert color='secondary'>Profile updated successfully</Alert>
                 )
             }
             {
