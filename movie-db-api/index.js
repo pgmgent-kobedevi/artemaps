@@ -14,7 +14,7 @@ db.connect();
 
 const hostname = 'localhost';
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 // register middleware
 registerMiddleware(app);
@@ -22,7 +22,7 @@ registerMiddleware(app);
 // register routes
 registerRoutes(app);
 
-app.listen(port, hostname, () => {
+app.listen(port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
