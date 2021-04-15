@@ -1,4 +1,6 @@
 import { createHeaders } from "../../utils/api";
+import axios from 'axios';
+
 
 const fetchMovies = () => (headers) => {
     return fetch(`${process.env.REACT_APP_BASE_API}/movies`, {
@@ -24,9 +26,18 @@ const fetchMovie = (id) => (headers) => {
     });
 }
 
+// file upload
+const uploadImage = (formData) => (headers) => {
+    return axios.post(`${process.env.REACT_APP_BASE_API}/uploads`, formData, {
+        headers: createHeaders(headers),
+        'content-type': 'multipart/form-data',
+    });
+}
+
 const createMovies = (data) => (headers) => {
     return fetch(`${process.env.REACT_APP_BASE_API}/movies`, {
         method:'POST',
+        'content-type': 'multipart/form-data',
         headers: createHeaders(headers),
         body: JSON.stringify(data),
     });
@@ -56,4 +67,5 @@ export {
     createMovies,
     updateMovie,
     deleteMovie,
+    uploadImage,
 }

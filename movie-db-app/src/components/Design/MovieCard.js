@@ -17,7 +17,8 @@ const MovieCard = ({movie, onUpdate, deleter}) => {
                 <DeleteButton deleter={() => deleter(movie)}/>
             </AdminContainer>
             <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
-                <img src={movie.coverLink} alt='Movie poster'/>
+                {/* <img src={`/public/uploads/${movie.coverLink}`} alt='Movie poster'/> */}
+                <img src={`${process.env.PUBLIC_URL}/uploads/${movie.coverLink}`} alt='Movie poster'/>
                 <section>
                     <p>{movie.title}</p>
                 </section>

@@ -1,8 +1,27 @@
 const NotFoundError = require('../errors/NotFoundError');
 const ValidationError = require('../errors/ValidationError');
 const { Movie } = require('../models/Movie');
+const path = require('path');
+const reqPath = path.join(__dirname, '../../');
+
 
 class MovieController {
+
+    uploadImage = async(req, res, next) => {
+        try {
+            if(req.files.file) {
+                const file = req.files.file;
+                file.mv(`${reqPath}/movie-db-app/public/uploads/${file.name}`, err => {
+                    if(err) {
+                        return res.status(500).send(err);
+                    }
+                    res.status(200);
+                });
+            }
+        } catch (e) {
+            next(e.name && e.name === "ValidationError" ? new ValidationError(e) : e);
+        }
+    }
         
     getMovies = async(req, res, next) => {
         try {

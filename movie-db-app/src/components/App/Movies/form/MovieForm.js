@@ -9,7 +9,7 @@ import DirectorSelect from "../../Directors/Select/DirectorSelect";
 const schema = yup.object().shape({
     title: yup.string().required(),
     directorId: yup.string().required().nullable(),
-    coverLink: yup.string().required(),
+    coverLink: yup.string().required("Cover image is a required field"),
     releaseDate: yup.string().required(),
     duration: yup.number().required(),
 });
@@ -22,8 +22,8 @@ const defaultData = {
     duration: 0,
 }
 
-const MovieForm = ({onSubmit, initialData={}, disabled}) => {
-
+const MovieForm = ({file, setFile, onSubmit, initialData={}, disabled}) => {
+    
     const [isTouched, setIsTouched] = useState(false);
     const [data, setData] = useState({
         ...defaultData,
@@ -37,17 +37,10 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
         if(e.target.localName === 'select') {
             // insanely dumb workaround to actually show the visually update 
             // because: virtual fields only updates when fetched again
-            // get label from selected option
             const text = e.target.[e.target.options.selectedIndex].innerHTML;
-            // make sure we have a firstname and lastname...
-            // split by space
             const res = text.split(" ");
-            // first half of the label is firstname
             const firstName = res.splice(0, Math.ceil(res.length / 2));
-            // second half is lastname
             const lastName = res.splice((Math.ceil(res.length / 2)) - 1, res.length);
-            // set virtual field 'director' to this.
-            // virtual field only updates when fetched again.
             setData({
                 ...data,
                 director: {
@@ -58,6 +51,9 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
                 directorId: e.target.value,
             })
         } else {
+            if(e.target.name === 'coverLink') {
+                setFile(e.target.files[0]);
+            }
             setData({
                ...data,
                [e.target.name]: e.target.value
@@ -91,7 +87,7 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
 
 
     return (
-        <form noValidate={true} onSubmit={handleSubmit}>
+        <form noValidate={true} onSubmit={handleSubmit} >
 
             <Input
                 label="Title"
@@ -113,14 +109,17 @@ const MovieForm = ({onSubmit, initialData={}, disabled}) => {
             />
 
             <Input
-                label="Link to cover image"
-                type="text"
+                label="Cover image"
+                type="file"
                 name="coverLink"
-                value={data.coverLink}
+                accept='image/png, image/jpeg, image/jpg'
                 disabled={disabled}
                 onChange={handleChange}
                 error={errors.coverLink}
             />
+            {
+                file && <p>File uploaded</p>
+            }
 
             <Input
                 label="Release year"

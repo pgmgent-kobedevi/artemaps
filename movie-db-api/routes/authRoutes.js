@@ -35,6 +35,9 @@ adminRouter.post('/movies', movieController.createMovie); // add
 adminRouter.patch('/movies/:id', movieController.updateMovieById); // update
 adminRouter.delete('/movies/:id', movieController.deleteMovieById); // delete
 
+// uploads
+adminRouter.post('/uploads', movieController.uploadImage);
+
 // Reviews
 authRouter.get('/movies/:id/reviews/:page/:perPage', reviewController.getReviewsPaginated);
 authRouter.get('/movies/:id/reviews', reviewController.getReviewsByMovie);

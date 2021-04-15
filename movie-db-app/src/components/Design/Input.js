@@ -22,6 +22,7 @@ const Input = React.forwardRef(
             <div className="form-group">
                 {label && <label htmlFor={name}>{label}:</label>}
                 <input
+                    id={name}
                     className={`form-control ${error ? 'is-invalid' : ''}`}
                     type={type}
                     name={name}
