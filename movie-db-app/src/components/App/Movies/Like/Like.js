@@ -1,4 +1,5 @@
 import HeartIcon from "./img/HeartIcon"
+import UnHeartIcon from "./img/UnHeartIcon"
 import { useLikedMovies } from "../../App";
 import { createLikedMovie, deleteLikedMovieByMovieId } from "../../../../core/modules/likedMovies/api";
 import useAuthApi from "../../../../core/hooks/useAuthApi";
@@ -44,9 +45,11 @@ const Like = ({movieId, onUpdate, movie}) => {
         }
     }
 
-    return (
-        <HeartIcon onClick={toggleLike}/>
-    )
+    if(likedMovies.some((movie) => movie.movieId === movieId)) {
+        return <UnHeartIcon onClick={toggleLike}/>
+    } else {
+        return <HeartIcon onClick={toggleLike}/>
+    }
 };
 
 export default Like;
