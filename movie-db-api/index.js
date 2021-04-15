@@ -14,7 +14,7 @@ db.connect();
 
 const hostname = 'localhost';
 const app = express();
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8000;
 
 // register middleware
 registerMiddleware(app);
