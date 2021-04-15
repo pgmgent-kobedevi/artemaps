@@ -69,7 +69,6 @@ class DirectorController {
         try {
             const {id} = req.params;
             const director = await Director.findById(id).exec();
-            console.log(director);
             if(director) {
                 // cant use pre because off multiple delete possibilities
                 await Movie.find({directorId: id}).exec()

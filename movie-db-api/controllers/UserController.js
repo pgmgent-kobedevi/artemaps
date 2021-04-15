@@ -113,7 +113,6 @@ class UserController {
                     password: u.password,
                     role: u.role,
                 });
-                // console.log(u);
                 const result = await u.save();
                 res.status(200).json({email: result.email, userName: result.userName});
             } else {

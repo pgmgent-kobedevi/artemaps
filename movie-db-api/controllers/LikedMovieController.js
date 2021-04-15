@@ -37,9 +37,7 @@ class LikedMovieController {
         try {
             const {user}= req;
             const {movieId} = req.params;
-            console.log(user, movieId);
             const movies = await LikedMovie.find({userId: user._id, movieId: movieId}).exec();
-            console.log(movies);
             if(movies) {
                 movies.map( async(movie) => {
                     await movie.remove();
