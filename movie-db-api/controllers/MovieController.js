@@ -11,9 +11,11 @@ class MovieController {
         try {
             if(req.files.file) {
                 const file = req.files.file;
-                file.mv(`${reqPath}/movie-db-app/public/uploads/${file.name}`, err => {
+                file.mv(`https://mobdev2-moviedbapp.herokuapp.com/public/uploads/${file.name}`, err => {
+                // file.mv(`../public/${file.name}`, err => {
                     if(err) {
-                        return res.status(500).send(err);
+                        // return res.status(500).send(err);
+                        console.log(err);
                     }
                     res.status(200);
                 });

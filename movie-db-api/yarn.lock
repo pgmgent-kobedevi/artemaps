@@ -529,6 +529,13 @@ express-fileupload@^1.2.1:
   dependencies:
     busboy "^0.3.1"
 
+express-static@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/express-static/-/express-static-1.2.6.tgz#567aab6ba808386936b8c17bb0a90f6f61d0db4f"
+  integrity sha512-pmp8fSe+bCxGCTk5+X6HzIF2APYMvrAq3Y7sT/WOELc0JZZxJhMTVgCbxcoUgMRBSqnQ9EfTw/Uv3J1ONoIAuA==
+  dependencies:
+    mime2 latest
+
 express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -1037,6 +1044,11 @@ mime-types@~2.1.24:
   integrity sha512-Y/jMt/S5sR9OaqteJtslsFZKWOIIqMACsJSiHghlCAyhf7jfVYjKBmLiX8OgpWeW+fjJ2b+Az69aPFPkUOY6xQ==
   dependencies:
     mime-db "1.46.0"
+
+mime2@latest:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/mime2/-/mime2-0.0.10.tgz#246bfbd53acc4c534b7c46af508624fd529e8357"
+  integrity sha512-4yUj0Hn2KIBparUeb2XLZgNYz1GdiB+kdBddNwUQwURY4p5eRVjuukARc6sOxIJJPVl527iVZ76BxdhvdZq1pw==
 
 mime@1.6.0:
   version "1.6.0"
