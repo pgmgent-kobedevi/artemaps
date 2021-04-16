@@ -24,36 +24,30 @@ const CreateMovie = () => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append('file', file);
-        data.coverLink = file.name;
-        // const options = {
-        //     method:'POST',
-        //     headers: {
-        //         'Authorization': `Bearer ${user.token}`,
-        //     },
-        //     body: formData,
-        // }
-        // delete options.headers['Content-Type'];
 
-        // fetch(`${process.env.REACT_APP_BASE_API}/uploads`, options)
-        // .then((message) => {
-        //     console.log(message);
-        // })
-        // .catch((err) => {
-        //     console.log('error', err);
-        // });
-            
-        withAuth(createMovies(data))
-        .then(async() => {
-            history.push(Routes.Movies);
-            await uploadImage(formData, user)
+        const myPromise = new Promise(async (resolve, reject) => {
+            await uploadImage(formData, data, user)
+            .then((data) => {
+                resolve(data.link);
+            });
+          });
+
+        myPromise
+        .then((link) => {
+            data.coverLink = link
+            withAuth(createMovies(data))
+            .then(async() => {
+                history.push(Routes.Movies);
+            })
             .catch((err) => {
                 setError(err);
-            });
+                setIsLoading(false);
+            })
         })
         .catch((err) => {
             setError(err);
-            setIsLoading(false);
-        })
+        });
+        
     }
 
     return (

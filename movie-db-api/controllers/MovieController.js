@@ -2,36 +2,21 @@ const NotFoundError = require('../errors/NotFoundError');
 const ValidationError = require('../errors/ValidationError');
 const { Movie } = require('../models/Movie');
 const path = require('path');
-const reqPath = path.join(__dirname, '../../');
-
-const multer = require('multer');
+const cloudinary = require("../utils/cloudinary");
 
 
 class MovieController {
 
-    // uploadImage = async(req, res, next) => {
-    //     try {
-    //         if(req.files.file) {
-    //             const file = req.files.file;
-    //             file.mv(`${reqPath}/movie-db-app/public/uploads/${file.name}`, err => {
-    //                 if(err) {
-    //                     return res.status(500).send(err);
-    //                 }
-    //                 res.status(200);
-    //             });
-    //         }
-    //     } catch (e) {
-    //         next(e.name && e.name === "ValidationError" ? new ValidationError(e) : e);
-    //     }
-    // }
-
     uploadImage = async(req, res, next) => {
-        try{
-            console.log(req.file);
-            res.status(200).json({message: 'file uploaded'});
-        } catch(e){
-            next(e);
-        }
+        try {
+            // Upload image to cloudinary
+            await cloudinary.uploader.upload(req.file.path)
+            .then((data) => {
+                res.status(200).json({link: data.secure_url});
+            })
+          } catch (err) {
+            res.status(400).json({message:'File size too large'});
+          }
     }
         
     getMovies = async(req, res, next) => {

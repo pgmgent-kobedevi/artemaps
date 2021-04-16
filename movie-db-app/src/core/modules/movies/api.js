@@ -27,7 +27,7 @@ const fetchMovie = (id) => (headers) => {
 }
 
 // file upload
-const uploadImage = (formData, user) => {
+const uploadImage = async(formData, data, user) => {
     const options = {
         method:'POST',
         headers: {
@@ -38,6 +38,8 @@ const uploadImage = (formData, user) => {
     delete options.headers['Content-Type'];
 
     return fetch(`${process.env.REACT_APP_BASE_API}/uploads`, options)
+    .then((res) => res.json())
+    .then((data) => data);
 }
 
 const createMovies = (data) => (headers) => {
