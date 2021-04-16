@@ -4,9 +4,33 @@ const MovieController = require('../controllers/MovieController');
 const ReviewController = require('../controllers/ReviewController');
 const DirectorController = require('../controllers/DirectorController');
 const LikedMovieController = require('../controllers/LikedMovieController');
+const UserController = require('../controllers/UserController');
 const { withRole } = require('../services/auth/auth.services');
 const { roles } = require('../models/User');
-const UserController = require('../controllers/UserController');
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+const fileFilter = (req, file, cb) => {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 10,
+    },
+    fileFilter: fileFilter,
+});
 
 const userController = new UserController();
 const directorController = new DirectorController();
@@ -36,7 +60,7 @@ adminRouter.patch('/movies/:id', movieController.updateMovieById); // update
 adminRouter.delete('/movies/:id', movieController.deleteMovieById); // delete
 
 // uploads
-adminRouter.post('/uploads', movieController.uploadImage);
+adminRouter.post('/uploads', upload.single('file') ,movieController.uploadImage);
 
 // Reviews
 authRouter.get('/movies/:id/reviews/:page/:perPage', reviewController.getReviewsPaginated);

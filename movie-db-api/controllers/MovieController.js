@@ -4,24 +4,33 @@ const { Movie } = require('../models/Movie');
 const path = require('path');
 const reqPath = path.join(__dirname, '../../');
 
+const multer = require('multer');
+
 
 class MovieController {
 
+    // uploadImage = async(req, res, next) => {
+    //     try {
+    //         if(req.files.file) {
+    //             const file = req.files.file;
+    //             file.mv(`${reqPath}/movie-db-app/public/uploads/${file.name}`, err => {
+    //                 if(err) {
+    //                     return res.status(500).send(err);
+    //                 }
+    //                 res.status(200);
+    //             });
+    //         }
+    //     } catch (e) {
+    //         next(e.name && e.name === "ValidationError" ? new ValidationError(e) : e);
+    //     }
+    // }
+
     uploadImage = async(req, res, next) => {
-        try {
-            if(req.files.file) {
-                const file = req.files.file;
-                file.mv(`https://mobdev2-moviedbapp.herokuapp.com/public/uploads/${file.name}`, err => {
-                // file.mv(`../public/${file.name}`, err => {
-                    if(err) {
-                        // return res.status(500).send(err);
-                        console.log(err);
-                    }
-                    res.status(200);
-                });
-            }
-        } catch (e) {
-            next(e.name && e.name === "ValidationError" ? new ValidationError(e) : e);
+        try{
+            console.log(req.file);
+            res.status(200).json({message: 'file uploaded'});
+        } catch(e){
+            next(e);
         }
     }
         
@@ -113,7 +122,9 @@ class MovieController {
     
     createMovie = async (req, res, next) => {
         try {
-            const movie = new Movie(req.body);
+            const movie = new Movie({
+                ...req.body,
+            });
             const result = await movie.save();
             res.status(200).json(result);
         } catch (e) {

@@ -27,11 +27,17 @@ const fetchMovie = (id) => (headers) => {
 }
 
 // file upload
-const uploadImage = (formData) => (headers) => {
-    return axios.post(`${process.env.REACT_APP_BASE_API}/uploads`, formData, {
-        headers: createHeaders(headers),
-        'content-type': 'multipart/form-data',
-    });
+const uploadImage = (formData, user) => {
+    const options = {
+        method:'POST',
+        headers: {
+            'Authorization': `Bearer ${user.token}`,
+        },
+        body: formData,
+    }
+    delete options.headers['Content-Type'];
+
+    return fetch(`${process.env.REACT_APP_BASE_API}/uploads`, options)
 }
 
 const createMovies = (data) => (headers) => {

@@ -25,11 +25,30 @@ const CreateMovie = () => {
         const formData = new FormData();
         formData.append('file', file);
         data.coverLink = file.name;
+        // const options = {
+        //     method:'POST',
+        //     headers: {
+        //         'Authorization': `Bearer ${user.token}`,
+        //     },
+        //     body: formData,
+        // }
+        // delete options.headers['Content-Type'];
+
+        // fetch(`${process.env.REACT_APP_BASE_API}/uploads`, options)
+        // .then((message) => {
+        //     console.log(message);
+        // })
+        // .catch((err) => {
+        //     console.log('error', err);
+        // });
             
         withAuth(createMovies(data))
-        .then(() => {
+        .then(async() => {
             history.push(Routes.Movies);
-            withAuth(uploadImage(formData, user))
+            await uploadImage(formData, user)
+            .catch((err) => {
+                setError(err);
+            });
         })
         .catch((err) => {
             setError(err);
@@ -42,7 +61,7 @@ const CreateMovie = () => {
             <h1>Create movie</h1>
 
             {
-                error && <ErrorAlert error={error} />
+                error && <ErrorAlert error={error.message} />
             }
 
             <MovieForm file={file} setFile={setFile} onSubmit={handleSubmit} disabled={isLoading}/>

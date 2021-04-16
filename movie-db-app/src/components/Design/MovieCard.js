@@ -17,8 +17,7 @@ const MovieCard = ({movie, onUpdate, deleter}) => {
                 <DeleteButton deleter={() => deleter(movie)}/>
             </AdminContainer>
             <Link to={route(Routes.MoviesDetail, {id: movie._id})}>
-                <img src={`${process.env.PUBLIC_URL}/uploads/${movie.coverLink}`} alt='Movie poster'/>
-                {/* <img src={`${process.env.PUBLIC_URL}/uploads/${movie.coverLink}`} alt='Movie poster'/> */}
+                <img src={`https://mobdev2-moviedbapi.herokuapp.com/uploads/${movie.coverLink}`} alt='Movie poster'/>
                 <section>
                     <p>{movie.title}</p>
                 </section>

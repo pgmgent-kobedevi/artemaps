@@ -87,7 +87,7 @@ const MovieForm = ({file, setFile, onSubmit, initialData={}, disabled}) => {
 
 
     return (
-        <form noValidate={true} onSubmit={handleSubmit} >
+        <form noValidate={true} onSubmit={handleSubmit} encType="multipart/form-data">
 
             <Input
                 label="Title"
