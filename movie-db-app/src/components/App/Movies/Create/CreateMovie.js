@@ -5,7 +5,6 @@ import { createMovies, uploadImage } from "../../../../core/modules/movies/api";
 import { Routes } from "../../../../core/routing";
 import ErrorAlert from "../../../Shared/ErrorAlert";
 import MovieForm from "../form/MovieForm"
-import axios from 'axios';
 import { useAuth } from "../../../Auth/AuthContainer";
 
 const CreateMovie = () => {
@@ -29,7 +28,10 @@ const CreateMovie = () => {
             await uploadImage(formData, data, user)
             .then((data) => {
                 resolve(data.link);
-            });
+            })
+            .catch((err) =>{
+                reject(err);
+            })
           });
 
         myPromise

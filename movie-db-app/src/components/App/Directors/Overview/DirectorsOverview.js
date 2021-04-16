@@ -9,6 +9,7 @@ import DeleteDirector from '../Delete/DeleteDirector';
 import DeleteDirectorAndMovies from '../Delete/DeleteDirectorAndMovies';
 import { useState } from 'react';
 import DeleteButton from '../../../Design/DeleteButton';
+import AdminContainer from '../../../Shared/Admin/AdminContainer';
 
 const DirectorsOverview = () => {
 
@@ -37,7 +38,7 @@ const DirectorsOverview = () => {
     }
 
     if (error) {
-        return <Alert color="danger">{error}</Alert>;
+        return <Alert color="danger">{error.message}</Alert>;
     }
 
     return (
@@ -55,17 +56,18 @@ const DirectorsOverview = () => {
             <ul>
                 {directors.map((director) => (
                     <li key={director._id}>
-                        <DeleteButton
-                            deleter={() => setDirector(director)}
-                        >
-                            director
-                        </DeleteButton>
-                        <DeleteButton
-                            deleter={() => setDirectorAndMore(director)}
-                        > 
-                            director and all movies 
-                        </DeleteButton>
-                        
+                        <AdminContainer>
+                            <DeleteButton
+                                deleter={() => setDirector(director)}
+                            >
+                                director
+                            </DeleteButton>
+                            <DeleteButton
+                                deleter={() => setDirectorAndMore(director)}
+                            > 
+                                director and all movies 
+                            </DeleteButton>
+                        </AdminContainer>                        
 
                         <Link to={route(Routes.DirectorsDetail, {id: director._id})}>
                             {director.name}
