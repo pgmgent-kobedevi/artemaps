@@ -5,7 +5,6 @@ import { fetchReviewsByMoviePagination } from '../../../../../../core/modules/re
 import { useCallback, useState } from 'react';
 import Pagination from '../../../../../Design/Pagination';
 import DeleteReview from '../Delete/DeleteReview';
-// import Button from '../../../../../Design/Button';
 import AdminContainer from '../../../../../Shared/Admin/AdminContainer';
 import DeleteButton from '../../../../../Design/DeleteButton';
 
@@ -52,8 +51,9 @@ const ReviewsOverview = ({movieId}) => {
         return (
             <>
                 { reviews.reviews.map((review) => (
-                    <div key={review._id}>
+                    <div className='review mt-4 mb-4' key={review._id}>
                         <h3>{review.user.userName}</h3>
+                        <div className={`star star-${review.rating}`}></div>
                         <p>{review.rating}</p>
                         <p>{review.review}</p>
                         <AdminContainer>

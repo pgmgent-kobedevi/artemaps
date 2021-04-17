@@ -1,6 +1,4 @@
 import { createHeaders } from "../../utils/api";
-import axios from 'axios';
-
 
 const fetchMovies = () => (headers) => {
     return fetch(`${process.env.REACT_APP_BASE_API}/movies`, {

@@ -10,19 +10,26 @@ const MovieDetail = ({movie}) => {
 
     return (
         <>
-            <h1>{movie.title}</h1>
-            {
-                movie.director && <p>Director: {movie.director.firstName} {movie.director.lastName}</p>
-            }
-            <p>Release year: {format(new Date(movie.releaseDate), 'yyyy')}</p>
-            <p>Duration: {formatMinutesToString(movie.duration)}</p>
+            <div className='movieContainer'>
+                <div>
+                    <img src={movie.coverLink} alt='movie cover'/>
+                </div>
+                <section className='movieDetails'>
+                    <h1 className='detailTitle'>{movie.title}</h1>
+                    {
+                        movie.director && <p><b>Director: </b>{movie.director.firstName} {movie.director.lastName}</p>
+                    }
+                    <p><b>Release year: </b>{format(new Date(movie.releaseDate), 'yyyy')}</p>
+                    <p><b>Duration: </b>{formatMinutesToString(movie.duration)}</p>
+                </section>
+            </div>
             <AdminContainer>
                 <Link className="edit" to={route(Routes.MoviesEdit, {id: movie._id})}>
                     📝
                 </Link>
             </AdminContainer>
             
-            <h2>Reviews</h2>
+            <h2 className="mt-4" >Reviews</h2>
             <Link to={route(Routes.MoviesCreateReview, {id: movie._id})} movie={movie}>Add review</Link>
             <ReviewsOverview movieId={movie._id}/>
         </>

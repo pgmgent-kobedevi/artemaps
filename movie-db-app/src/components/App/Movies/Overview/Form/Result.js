@@ -9,6 +9,7 @@ const Result = ({result, deleter, updateChecker}) => {
 
     const apiCall = useCallback(() => {
         return fetchFilteredMovies(result);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [result, updateChecker])
 
     const {

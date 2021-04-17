@@ -80,7 +80,7 @@ const UserForm = ({onSubmit, initialData={}, disabled}) => {
                 error={errors.userName}
             />
 
-            <Button type="submit" disabled={disabled}>
+            <Button className='mt-4' type="submit" disabled={disabled}>
                 Update
             </Button>
 

@@ -7,7 +7,7 @@ const DirectorDetail = ({director}) => {
 
     return (
         <>
-            <h1>{director.name}</h1>
+            <h1 className='mt-3'>{director.name}</h1>
             <AdminContainer>
                 <Link className='edit' to={route(Routes.DirectorsEdit, {id: director._id})}>
                     📝

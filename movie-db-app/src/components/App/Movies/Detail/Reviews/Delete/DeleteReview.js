@@ -1,5 +1,5 @@
 import useAuthApi from "../../../../../../core/hooks/useAuthApi";
-import { deleteMovie } from "../../../../../../core/modules/movies/api";
+import { deleteReview } from "../../../../../../core/modules/reviews/api";
 import Button from "../../../../../Design/Button";
 import Modal from "../../../../../Shared/Modal";
 
@@ -8,7 +8,7 @@ const DeleteReview = ({setError, review, onDismiss, onUpdate}) => {
     const withAuth = useAuthApi();
 
     const handleDelete = () =>{
-        withAuth(deleteMovie(review._id))
+        withAuth(deleteReview(review._id))
         .catch((e) => {
             setError(e)
         })
@@ -22,7 +22,7 @@ const DeleteReview = ({setError, review, onDismiss, onUpdate}) => {
         >
             <h2>Are you sure?</h2>
             <Button onClick={handleDelete}>Yes</Button>
-            <Button onClick={onDismiss}>No</Button>
+            <Button color="danger" onClick={onDismiss}>No</Button>
         </Modal>
 )
 

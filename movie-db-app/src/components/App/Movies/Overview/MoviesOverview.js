@@ -12,6 +12,7 @@ import Result from './Form/Result';
 import { useCallback, useState } from 'react';
 import Pagination from '../../../Design/Pagination';
 import DeleteMovie from '../Delete/DeleteMovie';
+import AddIcon from '../../../Design/AddIcon';
 
 const MoviesOverview = () => {
     
@@ -59,7 +60,7 @@ const MoviesOverview = () => {
                 error && <Alert color="danger">{error.message}</Alert>
             }
 
-            <h1>Movies:</h1>
+            <h1 className='mt-3'>Movies:</h1>
 
             {
                 isLoading && <Spinner />
@@ -74,7 +75,7 @@ const MoviesOverview = () => {
                         }
 
                         {
-                            admin && <Link className="add" to={Routes.MoviesCreate}>➕</Link>
+                            admin && <Link className="add" to={Routes.MoviesCreate}><AddIcon/></Link>
                         }
                         
                         <SearchForm

@@ -48,7 +48,7 @@ const DirectorsOverview = () => {
                 info && <Alert color="info">{info}</Alert>
             }
             
-            <h1>Directors</h1>
+            <h1 className='mt-3'>Directors</h1>
 
             {
                 admin && <Link className='add' to={Routes.DirectorsCreate}>➕</Link>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import useAuthApi from "../../../../core/hooks/useAuthApi";
 import { updateSelf } from "../../../../core/modules/users/api";
 import storage from "../../../../core/storage";
-import { useAuth } from "../../../Auth/AuthContainer";
 import Alert from "../../../Design/Alert";
 import ErrorAlert from "../../../Shared/ErrorAlert";
 import UserForm from "./Form/UserForm";
@@ -46,7 +45,7 @@ const EditUser = () => {
                 )
             }
 
-            <h1>Edit profile:</h1>
+            <h1 className='mt-3'>Edit profile:</h1>
             <UserForm
                 onSubmit={handleSubmit}
                 initialData={localUser}

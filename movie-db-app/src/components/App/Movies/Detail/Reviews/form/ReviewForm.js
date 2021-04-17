@@ -3,6 +3,7 @@ import { getValidationErrors } from "../../../../../../core/utils/validation";
 import Button from "../../../../../Design/Button";
 import Input from "../../../../../Design/Input";
 import * as yup from 'yup';
+import Rating from "../../../../../Design/Rating";
 
 const schema = yup.object().shape({
     rating: yup.number().min(1).max(10).required(),
@@ -59,16 +60,11 @@ const ReviewForm = ({onSubmit, initialData={}, disabled}) => {
     return (
         <form noValidate={true} onSubmit={handleSubmit}>
 
-            <Input
+            <Rating
                 label="Rating"
-                type="number"
                 name="rating"
-                min='1'
-                max='10'
-                value={data.rating.toString()}
-                disabled={disabled}
                 onChange={handleChange}
-                error={errors.rating}
+                disabled={disabled}
             />
 
             <Input
@@ -81,8 +77,7 @@ const ReviewForm = ({onSubmit, initialData={}, disabled}) => {
                 error={errors.review}
             />
 
-
-            <Button type="submit" disabled={disabled}>
+            <Button className='mt-4' type="submit" disabled={disabled}>
                 {data._id ? 'Update' : 'Create'}
             </Button>
 

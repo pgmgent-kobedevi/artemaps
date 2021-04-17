@@ -1,10 +1,9 @@
-import Button from "./Button";
 import DeleteButton from "./DeleteButton";
 import EditButton from "./EditButton";
 
 const Table = ({users, setter, deleter}) => {
     return (
-        <table>
+        <table className='mt-4'>
             <thead>
                 <tr>    
                     <th></th>

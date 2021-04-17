@@ -3,7 +3,7 @@ import Button from "./Button";
 const AddButton = ({adder}) => {
     return (
         <Button 
-            color='secondary' 
+            color='primary' 
             className="add" 
             onClick={adder}
         >

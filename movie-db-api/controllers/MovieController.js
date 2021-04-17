@@ -14,9 +14,9 @@ class MovieController {
             .then((data) => {
                 res.status(200).json({link: data.secure_url});
             })
-          } catch (err) {
+        } catch (err) {
             res.status(400).json({message:'File size too large'});
-          }
+        }
     }
         
     getMovies = async(req, res, next) => {

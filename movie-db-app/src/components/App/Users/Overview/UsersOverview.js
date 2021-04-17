@@ -63,7 +63,7 @@ const UsersOverview = () => {
                 error && <Alert color="danger">{error.message}</Alert>
             }
 
-            <h1>Users:</h1>
+            <h1 className='mt-3'>Users:</h1>
 
             {
                 isLoading && <Spinner />

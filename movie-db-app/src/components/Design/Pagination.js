@@ -21,17 +21,24 @@ const Pagination = ({page, perPage, perPageClick, pageAmount, onClick}) => {
                         <button disabled={page === pageAmount -1} onClick={() => onClick(page + 1)}>&gt;</button>
                     </li>
                 </ul>
+                <ul className='perPage'>
+                    <li className={perPage === 10 ? 'active': ''} >
+                        <button onClick={() => perPageClick(10)}>
+                            10
+                        </button>
+                    </li>
+                    <li className={perPage === 20 ? 'active': ''}>
+                        <button onClick={() => perPageClick(20)}>
+                            20
+                        </button>
+                    </li>
+                    <li className={perPage === 50 ? 'active': ''} >
+                        <button onClick={() => perPageClick(50)}>
+                            50
+                        </button>
+                    </li>
+                </ul>
             </nav>
-            <p>Per page:</p>
-            <button className={perPage === 10 ? 'active': ''} onClick={() => perPageClick(10)}>
-                10
-            </button>
-            <button className={perPage === 20 ? 'active': ''} onClick={() => perPageClick(20)}>
-                20
-            </button>
-            <button className={perPage === 50 ? 'active': ''} onClick={() => perPageClick(50)}>
-                50
-            </button>
         </>
     )
 }

@@ -123,7 +123,7 @@ const MovieForm = ({file, setFile, onSubmit, initialData={}, disabled}) => {
 
             <Input
                 label="Release year"
-                type="text"
+                type="number"
                 name="releaseDate"
                 value={data.releaseDate}
                 disabled={disabled}
@@ -141,7 +141,7 @@ const MovieForm = ({file, setFile, onSubmit, initialData={}, disabled}) => {
                 error={errors.duration}
             />
 
-            <Button type="submit" disabled={disabled}>
+            <Button className={'mt-4'} type="submit" disabled={disabled}>
                 {data._id ? 'Update' : 'Create'}
             </Button>
 

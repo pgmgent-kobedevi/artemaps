@@ -78,7 +78,7 @@ const DirectorForm = ({onSubmit, initialData={}, disabled}) => {
                 error={errors.lastName}
             />
 
-            <Button type="submit" disabled={disabled}>
+            <Button className='mt-4' type="submit" disabled={disabled}>
                 {data._id ? 'Update' : 'Create'}
             </Button>
 

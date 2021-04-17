@@ -20,7 +20,7 @@ const DeleteUser = ({user, onDismiss, onUpdate, setInfo}) => {
         >
             <h2>Are you sure?</h2>
             <Button onClick={handleDelete}>Yes</Button>
-            <Button onClick={onDismiss}>No</Button>
+            <Button color='danger' onClick={onDismiss}>No</Button>
         </Modal>
 )
 

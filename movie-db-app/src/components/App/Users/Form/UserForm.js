@@ -113,7 +113,7 @@ const UserForm = ({onSubmit, initialData={}, disabled, isNew}) => {
                 />
             </AdminContainer>
 
-            <Button type="submit" disabled={disabled}>
+            <Button className='mt-4' type="submit" disabled={disabled}>
                 {data._id ? 'Update' : 'Create'}
             </Button>
 

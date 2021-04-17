@@ -35,7 +35,11 @@ const Modal = ({ children, title, onDismiss }) => {
                                 onClick={onDismiss}
                             />
                         </div>
-                        <div className="modal-body">{children}</div>
+                        <div className="modal-body">
+                            <div className='btnContainer'>
+                                {children}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -61,23 +61,24 @@ const LoginPage = ({ setUser }) => {
     };
 
     return(
-        <Container>
-            <div className="text-center">
-                <form className={Styles['form-signin']} onSubmit={handleSubmit} noValidate={true}>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                    <ErrorAlert error={error}></ErrorAlert>
-
-                    <label htmlFor="email" className="sr-only">Email address</label>
-                    <Input type="email" name="email" value={data.email} onChange={handleChange} error={errors.email} />
-                    
-                    <label htmlFor="password" className="sr-only">Password</label>
-                    <Input type="password" name="password" value={data.password} onChange={handleChange} error={errors.password} />
-
-                    <Button color="primary" type="submit">Sign in</Button>
-                    <p className="mt-5 mb-3 text-muted">&copy; 2021-∞</p>
-                </form>
-            </div>
-        </Container>
+        <div className="middle">
+            <Container>
+                <div className="text-center">
+                    <h1 className="title mb-5">MOVIE DB</h1>
+                    <form className={Styles['form-signin']} onSubmit={handleSubmit} noValidate={true}>
+                        <h2 className="h3 mb-3 font-weight-normal">Please sign in</h2>
+                        <ErrorAlert error={error}></ErrorAlert>
+                        <Input label="Email" type="email" name="email" value={data.email} onChange={handleChange} error={errors.email} />
+                        <Input label="Password" type="password" name="password" value={data.password} onChange={handleChange} error={errors.password} />
+                        <div className='specialButton'>
+                            <div className='btnContainer'>
+                                <Button color="primary" type="submit">Log in</Button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </Container>
+        </div>
     )
 }
 
