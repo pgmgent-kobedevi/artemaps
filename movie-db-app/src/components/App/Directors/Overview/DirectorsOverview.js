@@ -3,14 +3,11 @@ import Spinner from '../../../Design/Spinner';
 import Alert from '../../../Design/Alert';
 import { fetchDirectors } from '../../../../core/modules/directors/api';
 import { Link } from 'react-router-dom';
-import { route, Routes } from '../../../../core/routing';
+import { Routes } from '../../../../core/routing';
 import useAdmin from '../../../../core/hooks/useAdmin';
 import DeleteDirector from '../Delete/DeleteDirector';
 import DeleteDirectorAndMovies from '../Delete/DeleteDirectorAndMovies';
 import { useState } from 'react';
-import DeleteButton from '../../../Design/DeleteButton';
-import AdminContainer from '../../../Shared/Admin/AdminContainer';
-import Table from '../../../Design/Table';
 import AddIcon from '../../../Design/AddIcon';
 import DirectorTable from './DirectorTable';
 

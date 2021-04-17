@@ -25,7 +25,7 @@ authRouter.get('/directors/:id/movies', directorController.getMoviesByDirectorId
 adminRouter.post('/directors', directorController.createDirector); // add
 adminRouter.patch('/directors/:id', directorController.updateDirectorById); // update
 adminRouter.delete('/directors/:id', directorController.deleteDirectorById); // delete
-adminRouter.delete('/directors/:id/delete', directorController.deleteDirectorByIdAndMovies); // delete on steroids?
+adminRouter.delete('/directors/:id/delete', directorController.deleteDirectorByIdAndMovies); // delete 
 
 // Movies
 authRouter.get('/movies/paginate/:page/:perPage', movieController.getMoviesPaginated); // overview

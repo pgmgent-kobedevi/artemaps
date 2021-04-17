@@ -10,6 +10,7 @@ import Alert from '../Design/Alert';
 const LikedMovies = createContext();
 
 const App = () => {
+
     const {
         data: likedMovies,
         setData: setLikedMovies,
@@ -28,10 +29,10 @@ const App = () => {
     return (
         <>
             <Header />
-            <div className="container-fluid">
-                <div className="row">
+            <div className="content">
+                <div className="app">
                     <Sidebar />
-                    <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <main>
                         {/* add likedMovies to provider so we can prevent constant connections to check if movie is liked or not*/}
                         <LikedMovies.Provider value={{likedMovies, setLikedMovies}}>
                             <MainRouting />

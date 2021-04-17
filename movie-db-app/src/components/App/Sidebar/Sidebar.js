@@ -21,9 +21,9 @@ const items = [{
 
 const Sidebar = () => {
     return (
-        <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
-            <div className="position-sticky pt-3">
-                <ul className="nav flex-column">
+        <nav id="sidenav" className="sidenav">
+            <div>
+                <ul>
                     {
                         items.map((item) => (
                             <li key={item.route} className="nav-item">
