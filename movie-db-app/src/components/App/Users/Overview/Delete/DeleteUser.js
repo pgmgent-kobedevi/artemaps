@@ -9,8 +9,10 @@ const DeleteUser = ({user, onDismiss, onUpdate, setInfo}) => {
 
     const handleDelete = () =>{
         withAuth(deleteUser(user._id))
-        setInfo('User deleted');
-        onUpdate();
+        .then(() => {
+            setInfo('User deleted');
+            onUpdate();
+        })
     }
 
     return(

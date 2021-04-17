@@ -129,7 +129,7 @@ class UserController {
             const user = await User.findById({_id: id}).exec();
             if(user) {
                 user.remove();
-                res.status(200);
+                res.status(200).json(user);
             } else {
                 next(new NotFoundError());
             }

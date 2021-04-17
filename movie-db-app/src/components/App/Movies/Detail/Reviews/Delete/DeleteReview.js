@@ -9,6 +9,9 @@ const DeleteReview = ({setError, review, onDismiss, onUpdate}) => {
 
     const handleDelete = () =>{
         withAuth(deleteReview(review._id))
+        .then(() => {
+            onUpdate();
+        })
         .catch((e) => {
             setError(e)
         })
