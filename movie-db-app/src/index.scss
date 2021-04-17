@@ -20,6 +20,10 @@ main {
     position: relative;
 }
 
+header.bg-dark {
+    background: $header !important;
+}
+
 .delete {
     display: flex;
     justify-content: center;

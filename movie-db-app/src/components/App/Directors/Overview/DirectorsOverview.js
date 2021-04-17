@@ -56,28 +56,6 @@ const DirectorsOverview = () => {
             {
                 admin && <Link className='add' to={Routes.DirectorsCreate}><AddIcon/></Link>
             }
-            {/* <ul>
-                {directors.map((director) => (
-                    <li key={director._id}>
-                        <AdminContainer>
-                            <DeleteButton
-                                deleter={() => setDirector(director)}
-                            >
-                                director
-                            </DeleteButton>
-                            <DeleteButton
-                                deleter={() => setDirectorAndMore(director)}
-                            > 
-                                director and all movies 
-                            </DeleteButton>
-                        </AdminContainer>                        
-
-                        <Link to={route(Routes.DirectorsDetail, {id: director._id})}>
-                            {director.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul> */}
             <DirectorTable
                 directors={directors}
                 deleter={setDirector}

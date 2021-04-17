@@ -35,7 +35,9 @@ const EditDirector = ({director, onUpdate}) => {
         <>
             <h1>Edit Director</h1>
 
-            <ErrorAlert error={error} />
+            {
+                error && <ErrorAlert error={error.message} />
+            }
 
             <DirectorForm initialData={director} onSubmit={handleSubmit} disabled={isLoading}/>
         </>

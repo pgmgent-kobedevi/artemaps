@@ -31,7 +31,7 @@ const MoviesOverview = ({directorId}) => {
     }
 
 if (error) {
-        return <Alert color="danger">{error}</Alert>;
+        return <Alert color="danger">{error.message}</Alert>;
     }
 
     return (
