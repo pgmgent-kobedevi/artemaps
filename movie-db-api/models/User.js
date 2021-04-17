@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { LikedMovie } = require('./LikedMovie');
 
 const roles = {
     admin: 'admin',
@@ -35,6 +36,11 @@ const userSchema = new mongoose.Schema({
     toObject: {
         virtuals: true,
     }
+});
+
+userSchema.pre(['remove', 'deleteMany'] , function() {
+    const user = this;
+    return LikedMovie.remove({userId: user._id});
 });
 
 userSchema.pre('save', function (next) {
