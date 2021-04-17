@@ -1,4 +1,7 @@
-const Pagination = ({page, perPage, perPageClick, pageAmount, onClick}) => {
+const Pagination = ({page, perPage, perPageClick, pageAmount=1, onClick}) => {
+    if(pageAmount <= 0) {
+        pageAmount =1;
+    }
 
     let array = [];
     for (let i = 1; i <= pageAmount; i++) {
