@@ -51,8 +51,9 @@ const ReviewsOverview = ({movieId}) => {
         return (
             <>
                 { reviews.reviews.map((review) => (
+                    console.log(review),
                     <div className='review mt-4 mb-4' key={review._id}>
-                        <h3>{review.user.userName}</h3>
+                        <h3>{review.user ? review.user.userName : '[deleted]'}</h3>
                         <div className={`star star-${review.rating}`}></div>
                         <p>{review.rating}</p>
                         <p>{review.review}</p>
