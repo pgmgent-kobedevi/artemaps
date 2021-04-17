@@ -1,7 +1,7 @@
 # Kobe Devillé React app
 
 ## App
-[http://mobdev2-moviedbapp.herokuapp.com](http://mobdev2-moviedbapp.herokuapp.com)
+[https://mobdev2-moviedbapp.herokuapp.com](https://mobdev2-moviedbapp.herokuapp.com)
 
 ---
 **NOTE**
@@ -20,4 +20,4 @@ https://cloudinary.com/<br/>
     - **Username:** admin@admin.com
     - **Password:** fons123  
 ## Api
-[http://mobdev2-moviedbapi.herokuapp.com](http://mobdev2-moviedbapi.herokuapp.com)
+[https://mobdev2-moviedbapi.herokuapp.com](https://mobdev2-moviedbapi.herokuapp.com)
