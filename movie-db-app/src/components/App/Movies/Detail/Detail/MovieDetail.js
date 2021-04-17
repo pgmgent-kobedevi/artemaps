@@ -5,6 +5,7 @@ import {format} from 'date-fns';
 import AdminContainer from '../../../../Shared/Admin/AdminContainer';
 import ReviewsOverview from '../Reviews/Overview/ReviewsOverview';
 import formatMinutesToString from '../../../../../core/modules/movies/utils';
+import EditIcon from '../../../../Design/EditIcon';
 
 const MovieDetail = ({movie}) => {
 
@@ -25,7 +26,7 @@ const MovieDetail = ({movie}) => {
             </div>
             <AdminContainer>
                 <Link className="edit" to={route(Routes.MoviesEdit, {id: movie._id})}>
-                    📝
+                    <EditIcon/>
                 </Link>
             </AdminContainer>
             

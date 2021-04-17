@@ -10,6 +10,9 @@ import DeleteDirectorAndMovies from '../Delete/DeleteDirectorAndMovies';
 import { useState } from 'react';
 import DeleteButton from '../../../Design/DeleteButton';
 import AdminContainer from '../../../Shared/Admin/AdminContainer';
+import Table from '../../../Design/Table';
+import AddIcon from '../../../Design/AddIcon';
+import DirectorTable from './DirectorTable';
 
 const DirectorsOverview = () => {
 
@@ -48,12 +51,12 @@ const DirectorsOverview = () => {
                 info && <Alert color="info">{info}</Alert>
             }
             
-            <h1 className='mt-3'>Directors</h1>
+            <h1 className='mt-3'>Directors: </h1>
 
             {
-                admin && <Link className='add' to={Routes.DirectorsCreate}>➕</Link>
+                admin && <Link className='add' to={Routes.DirectorsCreate}><AddIcon/></Link>
             }
-            <ul>
+            {/* <ul>
                 {directors.map((director) => (
                     <li key={director._id}>
                         <AdminContainer>
@@ -74,7 +77,12 @@ const DirectorsOverview = () => {
                         </Link>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
+            <DirectorTable
+                directors={directors}
+                deleter={setDirector}
+                deleterExtra={setDirectorAndMore}
+            />
             {
                 director && <DeleteDirector
                     director={director}
