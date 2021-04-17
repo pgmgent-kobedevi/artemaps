@@ -24,7 +24,7 @@ const CreateMovie = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const myPromise = new Promise(async (resolve, reject) => {
+        const fileUpload = new Promise(async (resolve, reject) => {
             await uploadImage(formData, data, user)
             .then((data) => {
                 resolve(data.link);
@@ -34,7 +34,7 @@ const CreateMovie = () => {
             })
           });
 
-        myPromise
+        fileUpload
         .then((link) => {
             data.coverLink = link
             withAuth(createMovies(data))
