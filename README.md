@@ -3,6 +3,9 @@
 ## App
 [https://mobdev2-moviedbapp.herokuapp.com](https://mobdev2-moviedbapp.herokuapp.com)
 
+A Movie Database, where a user can consult information about films and leave reviews. Each profile has a liked movies list where you can add and remove movies. You can filter movies by "director" and edit your profile.
+As an admin you have a CRUD system for all films, profiles and directors.
+
 ---
 **NOTE**
 
